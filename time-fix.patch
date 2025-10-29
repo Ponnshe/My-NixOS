@@ -1,0 +1,11 @@
+--- a/src/format_description/parse/mod.rs
++++ b/src/format_description/parse/mod.rs
+@@ -80,7 +80,7 @@
+ 
+     #[allow(unused_mut)]
+     #[cfg(feature = "alloc")]
+-    let items = format_items;
++    let items: Box<_> = format_items;
+ 
+     #[allow(unused_mut)]
+     #[cfg(not(feature = "alloc"))]

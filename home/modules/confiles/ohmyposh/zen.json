@@ -1,0 +1,117 @@
+{
+  "console_title_template": "{{ .Shell }} in {{ .Folder }}",
+  "version": 3,
+  "final_space": true,
+  "secondary_prompt": {
+    "template": "❯❯ ",
+    "foreground": "magenta",
+    "background": "transparent"
+  },
+  "transient_prompt": {
+    "newline": true,
+    "template": "❯ ",
+    "background": "transparent",
+    "foreground_templates": [
+      "{{if gt .Code 0}}red{{end}}",
+      "{{if eq .Code 0}}magenta{{end}}"
+    ]
+  },
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "type": "path",
+          "template": "{{ .Path }}",
+          "foreground": "blue",
+          "background": "transparent",
+          "style": "plain",
+          "properties": {
+            "cache_duration": "none",
+            "style": "full"
+          }
+        },
+        {
+          "type": "git",
+          "template": " {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }} <cyan>{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}</>",
+          "foreground": "p:grey",
+          "background": "transparent",
+          "style": "plain",
+          "properties": {
+            "branch_icon": "",
+            "cache_duration": "none",
+            "commit_icon": "@",
+            "fetch_status": true
+          }
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "right",
+      "segments": [
+        {
+          "type": "cmake",
+          "style": "plain",
+          "foreground": "#FFFFFF",
+          "background": "transparent",
+          "template": "    "
+        },
+        {
+          "type": "go",
+          "style": "plain",
+          "foreground": "#ffffff",
+          "background": "transparent",
+          "template": "  "
+        },
+        {
+          "type": "executiontime",
+          "style": "plain",
+          "foreground": "yellow",
+          "background": "transparent",
+          "template": "{{ .FormattedMs }}",
+          "properties": {
+            "cache_duration": "none",
+            "threshold": 5000
+          }
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "type": "python",
+          "style": "plain",
+          "foreground": "blue",
+          "background": "transparent",
+          "template": "   {{ .Full }} "
+        },
+        {
+          "type": "nix-shell",
+          "style": "powerline",
+          "foreground": "blue",
+          "background": "transparent",
+          "template": "via {{ .Type }}-shell"
+        },
+        {
+          "type": "text",
+          "template": "❯",
+          "background": "transparent",
+          "style": "plain",
+          "foreground_templates": [
+            "{{if gt .Code 0}}red{{end}}",
+            "{{if eq .Code 0}}magenta{{end}}"
+          ],
+          "properties": {
+            "cache_duration": "none"
+          }
+        }
+      ]
+    }
+  ]
+}
