@@ -15,8 +15,17 @@ return {
               loadOutDirsFromCheck = true,
               buildScripts = { enable = true },
             },
-            checkOnSave = diagnostics == "rust-analyzer",  -- corre Clippy al guardar
-            diagnostics = { enable = diagnostics == "rust-analyzer"},       -- activa diagnostics en tiempo real
+					check = {
+							command = "clippy",
+							extraArgs = { "--no-deps" },
+							-- 👇 fuerza que rust-analyzer reanalice el archivo completo en cada save
+							workspace = true,
+						},
+            checkOnSave = true,  -- corre Clippy al guardar
+            diagnostics = { 
+							enable = true,
+							experimental = {enable = true},
+						},       -- activa diagnostics en tiempo real
             procMacro = { enable = true },
             completion = { autoimport = { enable = true } },
             rustfmt = {
