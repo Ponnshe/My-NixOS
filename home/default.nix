@@ -1,7 +1,8 @@
 { config, pkgs, lib, ... }:
 let
   MODULES_PATH = ./modules;
-  CONFILES_PATH = ./modules/confiles; SCRIPTS_PATH = ./scripts;
+  CONFILES_PATH = ./modules/confiles; 
+	SCRIPTS_PATH = ./scripts;
 
 	importWithArgs = name: extraArgs:
 		import (MODULES_PATH + "/${name}.nix") (
@@ -96,5 +97,14 @@ in {
     # Variables de sesión limpias. 
     # LD_LIBRARY_PATH eliminado por seguridad.
 	};
+	xdg.desktopEntries.anytype = {
+    name = "Anytype";
+    genericName = "Knowledge Base";
+    # Aquí asegúrate de que la ruta sea correcta a donde está tu script
+    exec = "${SCRIPTS_PATH}/utils/run_extra_program.sh -appimg anytype";
+    terminal = false;
+    categories = [ "Office" "Utility" ];
+    icon = "utilities-terminal"; # O la ruta a un icono png si lo descargas
+  };
 
 }
