@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Ruta base configurada
-BASE_PATH="~/nixos-config/extra-apps"
+BASE_PATH="$HOME/nixos-config/extra-apps"
 
 # Verificar que se usó la flag y se pasó un nombre
 if [[ "$1" == "-appimg" ]] && [[ -n "$2" ]]; then
