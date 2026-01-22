@@ -167,7 +167,7 @@
       ];
     };
 
-    extraConfig = builtins.readFile "${CONFILES_PATH}/hyprland.conf";
+    #extraConfig = builtins.readFile "${CONFILES_PATH}/hyprland.conf";
   };
 
   services.hyprsunset = {

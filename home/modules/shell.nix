@@ -24,6 +24,7 @@ in
     edit_config = "sudo -E nvim /etc/nixos";
 		ls = "lsd";
 		la = "lsd -la";
+		anytype = "${SCRIPTS_PATH}/utils/run_extra_program.sh -appimg anytype";
   };
 
 	home.sessionVariables = {

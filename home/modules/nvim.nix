@@ -26,6 +26,6 @@
 		extraLuaConfig = ''
 			local lazy_path = vim.fn.expand("~/.config/nvim/lazy/lazy.nvim")
 			vim.opt.rtp:prepend(lazy_path)
-			vim.opt.runtimepath:append("${CONFILES_PATH}/nvim")
+			vim.opt.runtimepath:prepend("${CONFILES_PATH}/nvim")
 		'' + builtins.readFile "${CONFILES_PATH}/nvim/init.lua"; };
 }

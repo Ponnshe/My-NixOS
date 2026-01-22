@@ -4,19 +4,6 @@
 
 { config, pkgs, ... }:
 let
-  jdtls-wrapped = pkgs.stdenv.mkDerivation {
-    name = "jdtls-wrapped";
-    buildInputs = [ pkgs.makeWrapper ];
-    phases = [ "installPhase" ];
-    installPhase = ''
-      mkdir -p $out/bin
-      # Redirige las rutas de escritura a ~/.cache
-      makeWrapper ${pkgs.jdt-language-server}/bin/jdtls $out/bin/jdtls \
-        --set JAVA_OPTS "-Dosgi.configuration.area=$HOME/.cache/jdtls/config_linux" \
-        --set XDG_CONFIG_HOME "$HOME/.cache/jdtls" \
-        --set XDG_DATA_HOME "$HOME/.cache/jdtls"
-    '';
-  };
     xenlism-grub-theme = pkgs.fetchFromGitHub
     {
         owner = "Arkachur";
@@ -170,7 +157,10 @@ in
 
 
   # Sound with Pipewire
-  security.rtkit.enable = true;
+  security = {
+	  rtkit.enable = true;
+		pam.services.hyprland.enableGnomeKeyring = true;
+	};
 
   # Network Module
   networking.hostName = "Dante-NixOS"; # Define your hostname.
@@ -220,6 +210,7 @@ in
     permittedInsecurePackages = [
       "electron-25.9.0"
 			"qtwebengine-5.15.19"
+			"python-2.7.18.8"
     ];
   };
 
@@ -242,19 +233,11 @@ in
   environment.systemPackages = with pkgs; [
 	    xterm
 			xhost
-			mininet
-			openvswitch
 			wireshark
 			termshark
 
-      jdtls-wrapped
-
       plantuml
-      python3
 
-      texliveFull #Latex
-      zotero #Managing bibliography
-      semgrep #LSP server for TS
       powertop
       usbutils
       graphviz
@@ -262,12 +245,6 @@ in
 
       #Sensores de temp, fans, etc
       lm_sensors
-
-      #Assembler
-      nasm
-
-      #Logism
-      logisim-evolution
 
       # Control Celular
       scrcpy
@@ -280,28 +257,11 @@ in
       #stremio
 
       #For docker
-      docker-compose
-      yarn
       gnome-keyring
-      go
-
-      #For C DEV
-      gnumake
-      cmake #Necessary for compiling some emacs plugins
 
       #WebBrowsers
       firefox 
       vivaldi
-
-      #WebDev
-      postman
-      nodePackages_latest.browser-sync #Browser-sync
-
-      #Java Dev
-      jdk21
-      jdt-language-server
-      maven
-      gradle
 
       emacs
 
@@ -322,10 +282,6 @@ in
       libnotify 	#Generacion
 
       xdg-desktop-portal-gnome
-
-      protobuf			#Protoc (aprender)
-
-      rustup				#Control de versiones rust (aprender)
 
       #Control Audio
       pavucontrol	#Interfaz
@@ -363,11 +319,6 @@ in
 
   ];
 
-  environment.variables = {
-    JAVA_HOME = "${pkgs.jdk21}/lib/openjdk"; # Ruta automática de Nix
-    JDTLS_HOME = "${pkgs.jdt-language-server}/share/java/jdtls/";
-  };
-
   fonts.packages= with pkgs; [
     nerd-fonts.hack
   ];
@@ -387,6 +338,8 @@ in
         enable = false;		#Cambiar a true para usar mysql
         package = pkgs.mariadb;
     };
+
+		gnome.gnome-keyring.enable = true;
     pipewire = {
       enable = true;
       alsa.enable = true;
@@ -426,6 +379,9 @@ in
         CPU_MAX_PERF_ON_BAT = 20;
       };
     };
+		dbus = {
+		  enable = true;
+		};
   };
 
   # Open ports in the firewall.

@@ -1,8 +1,7 @@
 { config, pkgs, lib, ... }:
 let
   MODULES_PATH = ./modules;
-  CONFILES_PATH = ./modules/confiles;
-	SCRIPTS_PATH = ./scripts;
+  CONFILES_PATH = ./modules/confiles; SCRIPTS_PATH = ./scripts;
 
 	importWithArgs = name: extraArgs:
 		import (MODULES_PATH + "/${name}.nix") (
@@ -18,12 +17,11 @@ let
     importWithArgs name {
       inherit SCRIPTS_PATH;
     };
-
 in {
 	nixpkgs.config = {
-		allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-		];
+	  allowUnfree = true;
 		permittedInsecurePackages = [
+			"python-2.7.18.8"
     ];
 	};
   home.username = "ponnshe";
@@ -33,13 +31,11 @@ in {
   home.stateVersion = "25.05";
 
   home.packages = [ 
+		pkgs.appimage-run
+		pkgs.alsa-lib
 		pkgs.opencv
 		pkgs.git
     pkgs.home-manager 
-    pkgs.nodejs
-    pkgs.nodePackages.typescript-language-server
-    pkgs.nodePackages.vscode-langservers-extracted # incluye HTML, CSS, JSON LSP
-    pkgs.nodePackages.eslint
     pkgs.grim
     pkgs.slurp
     pkgs.wl-clipboard
@@ -48,8 +44,6 @@ in {
     pkgs.droidcam
     pkgs.helvum
     pkgs.man-pages
-		pkgs.postgresql
-		pkgs.dbeaver-bin
 		pkgs.wkhtmltopdf
     pkgs.nodePackages.mermaid-cli
 		pkgs.lsd
@@ -65,40 +59,18 @@ in {
 		pkgs.xorg.libXrandr
 
 		pkgs.xorg.libXi
+
 		# Nix-prefetc
 		pkgs.nix-prefetch
 		pkgs.nix-prefetch-github
 
-		#Python
-		pkgs.python3
-		
-		#Zotero
-		pkgs.zotero
-
 		pkgs.pandoc
+    # Algunos paquetes útiles globalmente para scripts rápidos, aunque idealmente deberían ir en flakes
+    pkgs.jq
+    pkgs.ripgrep
+    pkgs.fd
 
-		pkgs.mininet
-
-		pkgs.python313Packages.weasyprint
-
-		pkgs.pyright
-		pkgs.valgrind
-
-		pkgs.rust-analyzer
-		pkgs.rustc
-		pkgs.pkg-config
-
-		pkgs.cmake
-		pkgs.cargo
-		pkgs.clang
-
-		pkgs.llvmPackages.libclang.lib
-
-		pkgs.vulkan-tools
-		pkgs.vulkan-volk
-		pkgs.libGL
-		pkgs.mesa
-		pkgs.rustfmt
+		pkgs.zotero
   ]; 
 
   imports = [
@@ -121,11 +93,8 @@ in {
   ];
 
 	home.sessionVariables = {
-		# Para Rust/LLVM
-		LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
-
-		# Para Rust/Winit/Wayland
-		LD_LIBRARY_PATH = "$HOME/.nix-profile/lib:/run/current-system/sw/lib";
+    # Variables de sesión limpias. 
+    # LD_LIBRARY_PATH eliminado por seguridad.
 	};
 
 }

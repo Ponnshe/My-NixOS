@@ -11,9 +11,9 @@ return {
         default_settings = {
           ["rust-analyzer"] = {
             cargo = {
-              allFeatures = true,
-              loadOutDirsFromCheck = true,
-              buildScripts = { enable = true },
+              allFeatures = false,
+              loadOutDirsFromCheck = false,
+              buildScripts = { enable = false },
             },
 					check = {
 							command = "clippy",
@@ -21,12 +21,12 @@ return {
 							-- 👇 fuerza que rust-analyzer reanalice el archivo completo en cada save
 							workspace = true,
 						},
-            checkOnSave = true,  -- corre Clippy al guardar
+            checkOnSave = false,  -- corre Clippy al guardar
             diagnostics = { 
-							enable = true,
-							experimental = {enable = true},
+							enable = false,
+							experimental = {enable = true },
 						},       -- activa diagnostics en tiempo real
-            procMacro = { enable = true },
+            procMacro = { enable = false },
             completion = { autoimport = { enable = true } },
             rustfmt = {
               command = "rustfmt",  -- el que viene del repositorio

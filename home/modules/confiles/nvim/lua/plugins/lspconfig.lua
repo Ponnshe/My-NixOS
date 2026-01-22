@@ -24,7 +24,7 @@ return {
 		})
 
     -- Web stack
-    vim.lsp.config('tsserver', {
+    vim.lsp.config('ts_ls', {
       capabilities = capabilities,
 		})
 
@@ -39,6 +39,13 @@ return {
     vim.lsp.config('eslint', {
       capabilities = capabilities,
 		})
+
+		vim.lsp.enable('pyright')
+		vim.lsp.enable('clangd')
+		vim.lsp.enable('ts_ls')
+		vim.lsp.enable('html')
+		vim.lsp.enable('cssls')
+		vim.lsp.enable('eslint')
     -- Keymaps LSP
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'Go to definition', buffer = 0 })
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = 'Go to declaration', buffer = 0 })
@@ -46,5 +53,7 @@ return {
     vim.keymap.set('n', 'K',  vim.lsp.buf.hover, { desc = 'Hover documentation', buffer = 0 })
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = 'Rename', buffer = 0 })
     vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, { desc = "Format buffer", buffer = 0 })
+    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Actions", buffer = 0 })
+
   end,
 }
