@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Define tus rutas de scripts usando la variable que ya tienes
-BASE_DIR="$SCRIPTS_PATH/utils"
+BASE_DIR="$1"
 
 # 1. Listar solo los archivos de la carpeta utils
 # 2. Pasarlos a wofi en modo dmenu
