@@ -1,5 +1,5 @@
 {
-  description = "RustyRTC";
+  description = "Minimal reproducible Rust dev environment";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -16,53 +16,59 @@
         rust = pkgs.rust-bin.stable.latest.default.override {
           extensions = [ "rust-src" "clippy" "rustfmt" ];
         };
+        
+        # Lista de librerías que necesitamos tanto para compilar como para ejecutar
+        runtimeLibs = with pkgs; [
+          wayland
+          libxkbcommon
+          libglvnd        # Para OpenGL
+          xorg.libX11     # Winit a veces necesita fallback a X11
+          xorg.libXcursor
+          xorg.libXi
+          xorg.libXrandr
+          
+          alsa-lib
+          opencv
+          openssl
+          llvmPackages.libclang
+          llvmPackages.libcxx
+        ];
       in {
         devShells.default = pkgs.mkShell {
           name = "rust-dev-shell";
 
-          # --- HERRAMIENTAS DE COMPILACIÓN ---
           nativeBuildInputs = with pkgs; [
             pkg-config
             cmake
             llvmPackages.llvm
-            llvmPackages.clang  # Necesario para compilar el código C++ generado
+            llvmPackages.clang
             rust
             rust-analyzer
           ];
 
-          # --- LIBRERÍAS (.so) ---
-          buildInputs = with pkgs; [
-            alsa-lib
-            opencv
-            openssl
-            llvmPackages.libclang
-            llvmPackages.libcxx # A veces ayuda explícitamente
-          ];
+          buildInputs = runtimeLibs;
 
-          # --- VARIABLES DE ENTORNO ---
           env = {
             RUST_BACKTRACE = "1";
-            
-            # 1. Ruta para encontrar libclang.so
             LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
-            
-            # 2. Rutas para pkg-config
             PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
-
-            # 3. LA SOLUCIÓN A TU ERROR 'memory not found':
-            # Le decimos a Bindgen explícitamente dónde están los headers de C++ (libstdc++)
+            
+            # Fix para bindgen (header files)
             BINDGEN_EXTRA_CLANG_ARGS = builtins.concatStringsSep " " [
               "-isystem ${pkgs.llvmPackages.libclang.lib}/lib/clang/${pkgs.llvmPackages.libclang.version}/include"
               "-isystem ${pkgs.lib.getDev pkgs.stdenv.cc.cc}/include/c++/${pkgs.stdenv.cc.cc.version}"
-              "-isystem ${pkgs.lib.getDev pkgs.stdenv.cc.cc}/include/c++/${pkgs.stdenv.cc.cc.version}/${system}-gnu" # Ajuste para arquitectura
+              "-isystem ${pkgs.lib.getDev pkgs.stdenv.cc.cc}/include/c++/${pkgs.stdenv.cc.cc.version}/${system}-gnu"
               "-isystem ${pkgs.glibc.dev}/include"
             ];
+
+            # SOLUCIÓN PARA TU ERROR ACTUAL (NoWaylandLib):
+            # Esto le dice al binario dónde buscar las librerías .so al ejecutarse
+            LD_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath runtimeLibs}";
           };
-          
-          # Depuración opcional: imprime las rutas al entrar para verificar
+
           shellHook = ''
             echo "Environment loaded."
-            echo "BINDGEN args: $BINDGEN_EXTRA_CLANG_ARGS"
+            echo "Wayland libraries injected into LD_LIBRARY_PATH"
           '';
         };
       });

@@ -1,5 +1,11 @@
 { config, pkgs, MODULES_PATH, CONFILES_PATH, SCRIPTS_PATH, ... }:
 
+let
+ liveModules = "${config.home.homeDirectory}/nixos-config/home/modules";
+ liveScripts = "${config.home.homeDirectory}/nixos-config/home/scripts";
+ liveHomeFile = "${config.home.homeDirectory}/nixos-config/home/default.nix";
+ liveConfigurationFile = "${config.home.homeDirectory}/nixos-config/configuration.nix";
+in
 {
   wayland.windowManager.hyprland = {
     enable = true;
@@ -54,7 +60,7 @@
       decoration = {
         rounding = 10;
         active_opacity = 0.87;
-        inactive_opacity = 0.75;
+        inactive_opacity = 0.85;
         blur = {
           enabled = true;
           size = 5;
@@ -100,15 +106,36 @@
       windowrulev2 = [
         "workspace 3 silent, class:Emacs"
         "workspace 2 silent, class:Vivaldi-stable"
+				"workspace 2 silent, class:^(org.qutebrowser.qutebrowser)$"
         "workspace 1, class:foot"
         "workspace 3 silent, fullscreen class:sioyek"
+
+				#My file editor rules
+				"float, class:^my-file-editor"
+				"center, class:^(my-file-editor)$"
+				"dimaround, class:^(my-file-editor)$"
+				"size 80% 80%, class:^(my-file-editor)$"
+
+				#imv rules
+				"float, class:^imv"
+				"center, class:^(imv)$"
+				"dimaround, class:^(imv)$"
+				"size 80% 80%, class:^(imv)$"
       ];
+
+			layerrule = [
+			 "blur, wofi"
+			 "ignorezero, wofi"
+			 "dimaround, wofi"
+			];
 
       bind = [
         "$mainMod, Q, exec, foot"
         "$mainMod, W, killactive"
         "$mainMod, SPACE, togglefloating"
-        "$mainMod, R, exec, rofi -show drun -show-icons"
+        "$mainMod, R, exec, wofi --show drun"
+        "$mainMod, S, exec, bash ${SCRIPTS_PATH}/utils/launcher.sh ${SCRIPTS_PATH}/utils"
+        "$mainMod, E, exec, bash ${SCRIPTS_PATH}/utils/edit_menu.sh ${liveModules} ${SCRIPTS_PATH} ${liveScripts} ${liveHomeFile} ${liveConfigurationFile}"
         "$mainMod, P, pseudo"
         "$mainMod, V, togglesplit"
         "$mainMod, f, fullscreen"
@@ -147,6 +174,9 @@
 
 				# Waybar command
 				"$mainMod ALT, B, exec, bash ${SCRIPTS_PATH}/utils/toggle_waybar.sh"
+
+				# Performance command
+				"$mainMod ALT, P, exec, bash ${SCRIPTS_PATH}/utils/toggle_perf.sh ${SCRIPTS_PATH}"
       ] ++
         (builtins.concatLists (builtins.genList (i:
           let n = builtins.toString i;

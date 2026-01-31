@@ -14,8 +14,21 @@
 				wrap = "no";
 				tab_size = 2;
 			};
+			# 1. Definir la regla de apertura
+			open = {
+				rules = [
+					{ mime = "image/*"; use = [ "view" ]; }
+				];
+			};
 
 			opener = {
+				view = [
+					{
+						run = ''imv "$@"'';
+						detach = true; # Esto es clave para que Yazi no se quede bloqueado esperando
+						desc = "Open with imv";
+					}
+				];
 				edit = [
 					{
 						run = "$EDITOR \"$@\"";

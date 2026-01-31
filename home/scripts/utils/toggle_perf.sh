@@ -1,6 +1,9 @@
 #!/bin/bash
 # Detectar si las animaciones están activas
 HYPRGAMEMODE=$(hyprctl getoption animations:enabled | awk 'NR==1{print $2}')
+SCRIPT_DIR="$1"
+
+bash "{SCRIPT_DIR}/utils/toggle_wallpaper.sh"
 
 if [ "$HYPRGAMEMODE" = 1 ] ; then
     # MODO ALTO RENDIMIENTO (Duro y directo)

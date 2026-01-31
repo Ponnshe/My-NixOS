@@ -1,4 +1,3 @@
-# Qutebrowser config
 { pkgs, ... }:
 
 {
@@ -8,109 +7,99 @@
     # Habilitar Widevine para YouTube, Netflix y servicios de Google
     package = pkgs.qutebrowser.override { enableWideVine = true; };
 
-    # Configuración de búsqueda rápida (motores de búsqueda)
+    # Motores de búsqueda rápidos
     searchEngines = {
       DEFAULT = "https://www.google.com/search?q={}";
       nw = "https://search.nixos.org/packages?query={}";
       no = "https://search.nixos.org/options?query={}";
       gh = "https://github.com/search?q={}";
-      rs = "https://docs.rs/releases/search?query={}"; # Documentación de Rust
-      tr = "https://www.tradingview.com/chart/?symbol={}"; # Para tus trades (DXY, VIX)
+      rs = "https://docs.rs/releases/search?query={}"; # Rust Docs
+      tr = "https://www.tradingview.com/chart/?symbol={}"; # Trading
     };
 
     settings = {
-      # --- Solución para Google Apps ---
-      # Forzar User Agent para el login de Google
-      "content.headers.user_agent" = "Mozilla/5.0 (X11; Linux x86_64; rv:133.0) Gecko/20100101 Firefox/133.0";
-      
-      # Evitar que Google detecte el navegador como "no seguro"
+			"qt.args" = [ "disable-features=Translate" ];
+
+      # --- Comportamiento y Google ---
       "content.canvas_reading" = false;
       "content.webgl" = true;
-
-      # Permisos para Google Meet
       "content.media.audio_video_capture" = true;
       "content.geolocation" = true;
       "content.notifications.enabled" = true;
+      "content.headers.accept_language" = "es-AR,es;q=0.9,en;q=0.8";
 
-      # --- Estética y Comportamiento ---
-      "colors.webpage.darkmode.enabled" = true; # Forzar modo oscuro
-      "tabs.position" = "left"; # Tabs laterales (mejor para monitores anchos)
-      "tabs.width" = "15%";
-      "editor.command" = [ "emacsclient" "-c" "{}" ]; # Usa tu Emacs para editar campos de texto
+      # --- Estética Cyberpunk Violet ---
+      "colors.webpage.darkmode.enabled" = true;
+      "colors.webpage.bg" = "#1a1025"; # Violeta profundo
+      "colors.webpage.preferred_color_scheme" = "dark";
       
-      # Bloqueo de anuncios básico
+      # --- SOLUCIÓN ERROR image_8a3215.png ---
+      # Se elimina grayscale.pre_rendering porque ya no existe en Qt6
+      # En su lugar, usamos el algoritmo por defecto optimizado
+      "colors.webpage.darkmode.algorithm" = "lightness-cielab"; 
+
+      # --- Interfaz (Tabs y Editor) ---
+      "tabs.position" = "top";
+			"tabs.show" = "multiple";
+      "tabs.favicons.show" = "always";
+      "tabs.title.format" = "{index}: {audio}{current_title}";
+      "editor.command" = [ "emacsclient" "-c" "{}" ]; # Tu Emacs
       "content.blocking.method" = "both";
 
-			# --- Paleta de colores (Basada en tus archivos) ---
-			# Fondo: #001f3f (Azul Elegante de tu Waybar)
-			# Texto: #e4b5ff (Lila Claro de tu Waybar)
-			# Acento: #ca89f0 (Lavanda de tu Waybar)
-			# Bordes: #b50cf7 (Violeta de tu Hyprland)
+      # --- Colores de Enlaces y UI ---
+      "colors.hints.bg" = "#f78400"; # Naranja de tus bordes de Hyprland
+      "colors.hints.fg" = "#1a1025";
+      "colors.statusbar.url.fg" = "#e4b5ff";
+      "colors.statusbar.url.success.http.fg" = "#33ccff"; # Azul neón
+      "colors.statusbar.url.success.https.fg" = "#d29eff"; # Malva de tu CSS
 
-			"colors.completion.fg" = "#e4b5ff";
-			"colors.completion.bg" = "#001f3f";
-			"colors.completion.alternate.bg" = "#05294a";
-			"colors.completion.category.fg" = "#ca89f0";
-			"colors.completion.category.bg" = "#001f3f";
-			"colors.completion.category.border.top" = "#001f3f";
-			"colors.completion.category.border.bottom" = "#001f3f";
-			"colors.completion.item.selected.fg" = "#ffffff";
-			"colors.completion.item.selected.bg" = "#bf00ff"; # Violeta intenso
-			"colors.completion.item.selected.border.top" = "#bf00ff";
-			"colors.completion.item.selected.border.bottom" = "#bf00ff";
-			"colors.completion.match.fg" = "#7FDBFF"; # Azul cielo vibrante
+      # --- Completación (Qt6 Fix) ---
+      "colors.completion.fg" = "#e4b5ff";
+      "colors.completion.odd.bg" = "#1a1025";
+      "colors.completion.even.bg" = "#241e33";
+      "colors.completion.item.selected.bg" = "#b50cf7"; # Violeta Hyprland
+      "colors.completion.match.fg" = "#33ccff";
 
-			"colors.statusbar.normal.fg" = "#e4b5ff";
-			"colors.statusbar.normal.bg" = "#001f3f";
-			"colors.statusbar.insert.fg" = "#ffffff";
-			"colors.statusbar.insert.bg" = "#4b0082"; # Índigo profundo
-			"colors.statusbar.command.fg" = "#e4b5ff";
-			"colors.statusbar.command.bg" = "#001f3f";
-			"colors.statusbar.url.fg" = "#e4b5ff";
-			"colors.statusbar.url.success.http.fg" = "#7FDBFF";
-			"colors.statusbar.url.success.https.fg" = "#ca89f0";
-			"colors.statusbar.url.warn.fg" = "#f78400"; # Naranja de tu Hyprland border
+      # --- Barra de Pestañas ---
+      "colors.tabs.bar.bg" = "#1a1025";
+      "colors.tabs.selected.even.bg" = "#b50cf7";
+      "colors.tabs.selected.odd.bg" = "#b50cf7";
+      "colors.tabs.indicator.start" = "#33ccff";
+      "colors.tabs.indicator.stop" = "#d29eff";
 
-			"colors.tabs.bar.bg" = "#001f3f";
-			"colors.tabs.even.fg" = "#e4b5ff";
-			"colors.tabs.even.bg" = "#001f3f";
-			"colors.tabs.odd.fg" = "#e4b5ff";
-			"colors.tabs.odd.bg" = "#001f3f";
-			"colors.tabs.selected.even.fg" = "#ffffff";
-			"colors.tabs.selected.even.bg" = "#b50cf7"; # Tu borde activo de Hyprland
-			"colors.tabs.selected.odd.fg" = "#ffffff";
-			"colors.tabs.selected.odd.bg" = "#b50cf7";
-			"colors.tabs.indicator.start" = "#bf00ff";
-			"colors.tabs.indicator.stop" = "#ca89f0";
-
-			"colors.messages.error.bg" = "#bf00ff";
-			"colors.messages.info.bg" = "#001f3f";
-			"colors.messages.warning.bg" = "#f78400";
-			
-			"colors.prompts.fg" = "#e4b5ff";
-			"colors.prompts.bg" = "#001f3f";
-			"colors.prompts.selected.bg" = "#ca89f0";
+      # --- Barra de Estado ---
+      "colors.statusbar.normal.bg" = "#1a1025";
+      "colors.statusbar.insert.bg" = "#d29eff";
+      "colors.statusbar.insert.fg" = "#1a1025";
     };
 
-    # Atajos rápidos para tus herramientas diarias
     aliases = {
       "gdrive" = "open -t https://drive.google.com";
       "gdocs" = "open -t https://docs.google.com";
       "gmeet" = "open -t https://meet.google.com";
+
+			"trading" = "open https://www.tradingview.com/chart/JrFTObOt/?symbol=BINANCE%3ABTCUSDT ;; tab-only ;; open -t https://v3.tealstreet.io/es-AR/trade ;; open -t https://calc.trade/ ;; open -t https://docs.google.com/spreadsheets/d/1lVaMbr1qmcbSi1lUQT7LvLKc7PkyZbQbkEgPrraBJ4A/edit?gid=0#gid=0";
     };
 
-    # Keybindings específicos
-    keyBindings = {
+		keyBindings = {
       normal = {
-        ",m" = "spawn mpv {url}"; # Abrir video actual en MPV
-        ",p" = "config-cycle content.proxy system none"; # Toggle proxy si lo usas
+        ",m" = "spawn mpv {url}";
+        ",p" = "config-cycle content.proxy system none";
+        
+        # --- NUEVO: Atajo rápido para Trading ---
+        # Al presionar ',t' se ejecutará el alias 'trading'
+        ",t" = "trading";
       };
     };
 
+    # --- Persistencia de la solución de Google ---
     extraConfig = ''
-      # Configuración específica por dominio (Python puro)
-      # Esto asegura que el User Agent de Google solo se aplique donde es necesario
-      config.set('content.headers.user_agent', 'Mozilla/5.0 (X11; Linux x86_64; rv:133.0) Gecko/20100101 Firefox/133.0', 'https://accounts.google.com/*')
+      # Definimos el UA que te funcionó
+      ua_google = "Mozilla/5.0 ({os_info}; rv:135.0) Gecko/20100101 Firefox/135"
+      
+      # Aplicar a login y a todo el ecosistema Google para evitar el error de "No puedes acceder"
+      config.set('content.headers.user_agent', ua_google, 'https://accounts.google.com/*')
+      config.set('content.headers.user_agent', ua_google, 'https://*.google.com/*')
     '';
   };
 }

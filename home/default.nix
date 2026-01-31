@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
 let
-  MODULES_PATH = ./modules;
+  MODULES_PATH =  ./modules;
   CONFILES_PATH = ./modules/confiles; 
 	SCRIPTS_PATH = ./scripts;
 
@@ -32,6 +32,7 @@ in {
   home.stateVersion = "25.05";
 
   home.packages = [ 
+		pkgs.brave
 		pkgs.appimage-run
 		pkgs.alsa-lib
 		pkgs.opencv
@@ -77,6 +78,7 @@ in {
   imports = [
     (importWithScripts "shell")
     (importBasic "foot")
+    (importBasic "mpv")
 		(importWithArgs "nvim" { inherit lib; })
     (importWithScripts "hyprland")
     (importBasic "intellij")
@@ -91,12 +93,19 @@ in {
 		(importWithScripts "wofi")
 		(importBasic "lazygit")
 		(importBasic "zellij")
+		(importBasic "qutebrowser")
+		(importBasic "obs-studio")
+		(importBasic "imv")
   ];
 
 	home.sessionVariables = {
     # Variables de sesión limpias. 
     # LD_LIBRARY_PATH eliminado por seguridad.
 	};
+
+	home.sessionPath = [
+		"${SCRIPTS_PATH}/utils"
+	];
 	xdg.desktopEntries.anytype = {
     name = "Anytype";
     genericName = "Knowledge Base";

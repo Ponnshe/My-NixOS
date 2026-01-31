@@ -89,8 +89,6 @@ in
       isNormalUser = true;
       description = "NervoOlalla";
       extraGroups = ["plugdev" "networkmanager" "wheel" "video" "audio" "docker" "adbusers" "udev" "wireshark"];
-      packages = with pkgs; [
-        ];
     };
   };
 
@@ -112,7 +110,10 @@ in
       package = pkgs.jdk21;
     };
 		adb.enable = true;
+		wireshark.enable = true;
+		wireshark.package = pkgs.wireshark;
   };
+
 
   # Hardware Module
   hardware = {
@@ -147,7 +148,10 @@ in
   #zramSwap Module
   zramSwap = {
     enable = true;
+		algorithm = "zstd"; # El mejor algoritmo de compresión actual
+		memoryPercent = 50; # Usar hasta el 50% de tu RAM para compresión
   };
+
 
   # Desktop Portals
   xdg = {
@@ -272,7 +276,6 @@ in
       git
       picom		#transparency
 
-      rofi	#launch apps
       nitrogen 	#Ver fotos
 
       kitty 		#terminal
