@@ -1,30 +1,5 @@
 { config, pkgs, lib, scriptsPath, myModulesPath, confilePath, ... }:
-let
-  MODULES_PATH =  ./modules;
-  CONFILES_PATH = ./modules/confiles; 
-	SCRIPTS_PATH = ./scripts;
-
-	importWithArgs = name: extraArgs:
-		import (MODULES_PATH + "/${name}.nix") (
-			{
-				inherit config pkgs MODULES_PATH CONFILES_PATH;
-			} // extraArgs
-		);
-
-	importBasic = name:
-    importWithArgs name {};
-
-	importWithScripts = name:
-    importWithArgs name {
-      inherit SCRIPTS_PATH;
-    };
-in {
-	nixpkgs.config = {
-	  allowUnfree = true;
-		permittedInsecurePackages = [
-			"python-2.7.18.8"
-    ];
-	};
+{
   home.username = "ponnshe";
   home.homeDirectory = "/home/ponnshe";
 

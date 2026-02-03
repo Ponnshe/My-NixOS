@@ -206,9 +206,6 @@ in
     allowUnfree = true;
     allowUnsupportedSystem = true;
     permittedInsecurePackages = [
-      "electron-25.9.0"
-			"qtwebengine-5.15.19"
-			"python-2.7.18.8"
     ];
   };
 
@@ -251,9 +248,6 @@ in
       #Fondo animado
       mpvpaper
 
-      #Entertainment
-      #stremio
-
       #For docker
       gnome-keyring
 
@@ -292,7 +286,6 @@ in
       zathura
       mupdf
 
-      obsidian
       file
 
       #Herramientas de Sistema
@@ -407,12 +400,26 @@ in
     dates = "weekly";
   };
 
-  # Collection Garbage
+	# Nix Configuration
   nix = {
     settings = {
-	auto-optimise-store = true;   
-	experimental-features = ["nix-command" "flakes"];
+      auto-optimise-store = true;
+      experimental-features = ["nix-command" "flakes"];
+      
+      # Configuración de Cachix
+      substituters = [
+        "https://cache.nixos.org/"
+        "https://nix-community.cachix.org"
+      ];
+      trusted-public-keys = [
+        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
+
+      # IMPORTANTE: Esto permite que tu usuario gestione caches sin sudo
+      trusted-users = [ "root" "ponnshe" ];
     };
+
     gc = {
       automatic = true;
       dates = "weekly";
