@@ -1,6 +1,6 @@
 # Renderizador de imagenes
 
-{ config, pkgs, MODULES_PATH, CONFILES_PATH, ... }:
+{ config, pkgs, ... }:
 {
   programs.imv = {
     enable = true;

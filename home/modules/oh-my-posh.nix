@@ -1,8 +1,8 @@
-{ config, pkgs, MODULES_PATH, CONFILES_PATH, ... }:
+{ config, pkgs, confilePath, ... }:
 
 {
   programs.oh-my-posh = {
     enable = true;
-    settings = builtins.fromJSON (builtins.unsafeDiscardStringContext (builtins.readFile "${CONFILES_PATH}/ohmyposh/zen.json"));
+    settings = builtins.fromJSON (builtins.unsafeDiscardStringContext (builtins.readFile "${confilePath}/ohmyposh/zen.json"));
   };
 }

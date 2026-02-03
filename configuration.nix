@@ -103,12 +103,6 @@ in
     waybar.enable = true;
     xfconf.enable = true;
     wshowkeys.enable = true;
-    npm.enable = true;
-    direnv.enable = true;
-    java={
-      enable = true;
-      package = pkgs.jdk21;
-    };
 		adb.enable = true;
 		wireshark.enable = true;
 		wireshark.package = pkgs.wireshark;

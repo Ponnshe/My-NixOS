@@ -1,4 +1,4 @@
-{ config, pkgs, MODULES_PATH, CONFILES_PATH, ... }:
+{ config, pkgs, ... }:
 {
   programs.mpv = {
     enable = true;

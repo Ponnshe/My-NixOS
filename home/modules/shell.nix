@@ -1,17 +1,5 @@
-{ config, pkgs, MODULES_PATH, CONFILES_PATH, SCRIPTS_PATH, ... }:
-let
-  MODULES_PATH = ./.;
-  CONFILES_PATH = ./confiles;
-  importBasic = name:
-      import (MODULES_PATH + "/${name}.nix") {
-        inherit config pkgs MODULES_PATH CONFILES_PATH;
-      };
-  importWithScripts= name:
-      import (MODULES_PATH + "/${name}.nix") {
-        inherit config pkgs MODULES_PATH CONFILES_PATH SCRIPTS_PATH;
-      };
-in 
-
+{ config, pkgs, myModulesPath, scriptsPath, confilePath, ... }:
+# We need all the imports for the imports for shell
 {
   # Configuración global para los shells
   home.shell.enableShellIntegration = true;  # Habilita la integración global para todos los shells
@@ -24,7 +12,7 @@ in
     edit_config = "sudo -E nvim /etc/nixos";
 		ls = "lsd";
 		la = "lsd -la";
-		anytype = "${SCRIPTS_PATH}/utils/run_extra_program.sh -appimg anytype";
+		anytype = "${scriptsPath}/utils/run_extra_program.sh -appimg anytype";
   };
 
 	home.sessionVariables = {
@@ -32,10 +20,10 @@ in
 	};
 
   imports = [
-    (importBasic "fzf")
-    (importBasic "oh-my-posh")
-    (importBasic "zoxide")
-    (importBasic "direnv")
-    (importWithScripts "zsh")
+    "${myModulesPath}/fzf.nix"
+    "${myModulesPath}/oh-my-posh.nix"
+    "${myModulesPath}/zoxide.nix"
+    "${myModulesPath}/direnv.nix"
+    "${myModulesPath}/zsh.nix"
   ];
 }

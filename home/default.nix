@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, scriptsPath, myModulesPath, confilePath, ... }:
 let
   MODULES_PATH =  ./modules;
   CONFILES_PATH = ./modules/confiles; 
@@ -76,26 +76,28 @@ in {
   ]; 
 
   imports = [
-    (importWithScripts "shell")
-    (importBasic "foot")
-    (importBasic "mpv")
-		(importWithArgs "nvim" { inherit lib; })
-    (importWithScripts "hyprland")
-    (importBasic "intellij")
-    (importBasic "sioyek")
-    (importBasic "yazi")
-    (importBasic "ripgrep")
-    (importBasic "fd")
-		(importBasic "ruff")
-		(importBasic "btop")
-		(importBasic "swaylock")
-		(importWithScripts "systemd")
-		(importWithScripts "wofi")
-		(importBasic "lazygit")
-		(importBasic "zellij")
-		(importBasic "qutebrowser")
-		(importBasic "obs-studio")
-		(importBasic "imv")
+		"${myModulesPath}/shell.nix"
+		"${myModulesPath}/foot.nix"
+		"${myModulesPath}/mpv.nix"
+		"${myModulesPath}/nvim.nix"
+		"${myModulesPath}/hyprland.nix"
+		"${myModulesPath}/intellij.nix"
+		"${myModulesPath}/sioyek.nix"
+		"${myModulesPath}/yazi.nix"
+		"${myModulesPath}/ripgrep.nix"
+		"${myModulesPath}/fd.nix"
+		"${myModulesPath}/ruff.nix"
+		"${myModulesPath}/btop.nix"
+		"${myModulesPath}/swaylock.nix"
+		"${myModulesPath}/systemd.nix"
+		"${myModulesPath}/wofi.nix"
+		"${myModulesPath}/lazygit.nix"
+		"${myModulesPath}/zellij.nix"
+		"${myModulesPath}/qutebrowser.nix"
+		"${myModulesPath}/obs-studio.nix"
+		"${myModulesPath}/imv.nix"
+		"${myModulesPath}/gemini-cli.nix"
+		"${myModulesPath}/direnv.nix"
   ];
 
 	home.sessionVariables = {
@@ -104,13 +106,13 @@ in {
 	};
 
 	home.sessionPath = [
-		"${SCRIPTS_PATH}/utils"
+		"${scriptsPath}/utils"
 	];
 	xdg.desktopEntries.anytype = {
     name = "Anytype";
     genericName = "Knowledge Base";
     # Aquí asegúrate de que la ruta sea correcta a donde está tu script
-    exec = "${SCRIPTS_PATH}/utils/run_extra_program.sh -appimg anytype";
+    exec = "${scriptsPath}/utils/run_extra_program.sh -appimg anytype";
     terminal = false;
     categories = [ "Office" "Utility" ];
     icon = "utilities-terminal"; # O la ruta a un icono png si lo descargas

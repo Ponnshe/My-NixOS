@@ -1,4 +1,4 @@
-{ config, pkgs, MODULES_PATH, CONFILES_PATH, SCRIPTS_PATH, ... }:
+{ config, pkgs, scriptsPath, ... }:
 {
 	systemd.user = {
 		enable = true;
@@ -10,7 +10,7 @@
 				};
 
 				Service = {
-					ExecStart = "${pkgs.bash}/bin/bash ${SCRIPTS_PATH}/utils/bat_lock.sh";
+					ExecStart = "${pkgs.bash}/bin/bash ${scriptsPath}/utils/bat_lock.sh";
 					Restart = "always";
 					RestartSec = 10;
 					Environment = "PATH=${pkgs.coreutils}/bin:${pkgs.util-linux}/bin:${pkgs.bash}/bin:${pkgs.libnotify}/bin:${pkgs.swaylock}/bin";

@@ -1,8 +1,8 @@
-{ config, pkgs, MODULES_PATH, CONFILES_PATH, lib, ... }:
+{ config, pkgs, confilePath, lib, ... }:
 
 {
 	home.sessionVariables = {
-    NVIM_EXTRA_RTP = "${CONFILES_PATH}/nvim";
+    NVIM_EXTRA_RTP = "${confilePath}/nvim";
   };
 
 	home.activation.lazy-nvim = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
@@ -26,6 +26,6 @@
 		extraLuaConfig = ''
 			local lazy_path = vim.fn.expand("~/.config/nvim/lazy/lazy.nvim")
 			vim.opt.rtp:prepend(lazy_path)
-			vim.opt.runtimepath:prepend("${CONFILES_PATH}/nvim")
-		'' + builtins.readFile "${CONFILES_PATH}/nvim/init.lua"; };
+			vim.opt.runtimepath:prepend("${confilePath}/nvim")
+		'' + builtins.readFile "${confilePath}/nvim/init.lua"; };
 }

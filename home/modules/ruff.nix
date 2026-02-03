@@ -1,5 +1,5 @@
 # Este archivo configura la integración del linter y formateador para Python llamado Ruff, así como su servidor Language Server Protocol (LSP) para uso en editores compatibles (Neovim, VSCode, etc.) a través de Home Manager.
-{ config, pkgs, MODULES_PATH, CONFILES_PATH, ... }:
+{ config, pkgs, ... }:
 {
 	programs.ruff ={
 		enable = true;  # activa Ruff CLI

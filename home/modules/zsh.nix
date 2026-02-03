@@ -1,4 +1,4 @@
-{ config, pkgs, MODULES_PATH, CONFILES_PATH, SCRIPTS_PATH, ... }:
+{ config, pkgs, scriptsPath, ... }:
 
 {
   programs.zsh = {
@@ -55,11 +55,11 @@
     };
 
     # Variables extras
+		# export SHELL="/run/current-system/sw/bin/zsh"
     envExtra = ''
-        export PATH="$PATH:/home/ponnshe/go/bin:/home/ponnshe/.npm/bin"
-        export SHELL="/run/current-system/sw/bin/zsh"
         export LS_COLORS=$(dircolors -b)
     '';
+
 
     # Configuraciones adicionales
     initContent = ''
@@ -73,6 +73,6 @@
       precmd() {
         print -Pn "\e]133;A\e\\"
       }
-    '' + builtins.readFile "${SCRIPTS_PATH}/utils/yazi.sh";
+    '' + builtins.readFile "${scriptsPath}/utils/yazi.sh";
   };
 }

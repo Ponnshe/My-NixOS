@@ -1,4 +1,4 @@
-{ config, pkgs, MODULES_PATH, CONFILES_PATH, ... }:
+{ config, pkgs, ... }:
 {
 	programs.yazi = {
 		enable = true;
@@ -18,6 +18,9 @@
 			open = {
 				rules = [
 					{ mime = "image/*"; use = [ "view" ]; }
+					# Agrega esto para capturar texto explícito y todo lo demás:
+					{ mime = "text/*"; use = [ "edit" ]; }
+					{ name = "*"; use = [ "edit" ]; }
 				];
 			};
 

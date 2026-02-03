@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 {
-	programs.lazygit = {
+	programs.gemini-cli = {
 		enable = true;
 	};
 }

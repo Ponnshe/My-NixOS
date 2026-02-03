@@ -1,4 +1,4 @@
-{ config, pkgs, MODULES_PATH, CONFILES_PATH, SCRIPTS_PATH, ... }:
+{ config, pkgs, scriptsPath, ... }:
 
 let
  liveModules = "${config.home.homeDirectory}/nixos-config/home/modules";
@@ -134,8 +134,8 @@ in
         "$mainMod, W, killactive"
         "$mainMod, SPACE, togglefloating"
         "$mainMod, R, exec, wofi --show drun"
-        "$mainMod, S, exec, bash ${SCRIPTS_PATH}/utils/launcher.sh ${SCRIPTS_PATH}/utils"
-        "$mainMod, E, exec, bash ${SCRIPTS_PATH}/utils/edit_menu.sh ${liveModules} ${SCRIPTS_PATH} ${liveScripts} ${liveHomeFile} ${liveConfigurationFile}"
+        "$mainMod, S, exec, bash ${scriptsPath}/utils/launcher.sh ${scriptsPath}/utils"
+        "$mainMod, E, exec, bash ${scriptsPath}/utils/edit_menu.sh ${liveModules} ${scriptsPath} ${liveScripts} ${liveHomeFile} ${liveConfigurationFile}"
         "$mainMod, P, pseudo"
         "$mainMod, V, togglesplit"
         "$mainMod, f, fullscreen"
@@ -150,7 +150,7 @@ in
 
 
         # Utils
-        "$mainMod SHIFT, S, exec, ${SCRIPTS_PATH}/utils/screenshot.sh"
+        "$mainMod SHIFT, S, exec, ${scriptsPath}/utils/screenshot.sh"
         "$mainMod SHIFT, R, exec, reboot"
 
         #Brightness
@@ -170,13 +170,13 @@ in
         "$mainMod ALT, h, resizeactive, -10 0"
 
 				# Wallpapers commands
-				"$mainMod ALT, W, exec, bash ${SCRIPTS_PATH}/utils/toggle_wallpaper.sh"
+				"$mainMod ALT, W, exec, bash ${scriptsPath}/utils/toggle_wallpaper.sh"
 
 				# Waybar command
-				"$mainMod ALT, B, exec, bash ${SCRIPTS_PATH}/utils/toggle_waybar.sh"
+				"$mainMod ALT, B, exec, bash ${scriptsPath}/utils/toggle_waybar.sh"
 
 				# Performance command
-				"$mainMod ALT, P, exec, bash ${SCRIPTS_PATH}/utils/toggle_perf.sh ${SCRIPTS_PATH}"
+				"$mainMod ALT, P, exec, bash ${scriptsPath}/utils/toggle_perf.sh ${scriptsPath}"
       ] ++
         (builtins.concatLists (builtins.genList (i:
           let n = builtins.toString i;
@@ -192,12 +192,11 @@ in
       ];
 
       exec-once = [
-        "bash ${SCRIPTS_PATH}/utils/start.sh"
+        "bash ${scriptsPath}/utils/start.sh"
         "bash ~/scripts/clean_auto_saves.sh"
       ];
     };
 
-    #extraConfig = builtins.readFile "${CONFILES_PATH}/hyprland.conf";
   };
 
   services.hyprsunset = {
