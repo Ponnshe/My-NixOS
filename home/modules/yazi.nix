@@ -64,7 +64,7 @@
 		};
 
 		plugins = {
-			"fullBorder" = pkgs.yaziPlugins.full-border;
+			"full-border" = pkgs.yaziPlugins.full-border;
 			"yatline" = pkgs.yaziPlugins.yatline;
 			"yatline-dracula" = pkgs.runCommand "yatline-dracula" {} ''
 				mkdir -p $out
@@ -80,7 +80,7 @@
 		};
 
 		initLua = ''
-			require("fullBorder"):setup()
+			require("full-border"):setup()
 			local dracula_theme = require("yatline-dracula"):setup()
 
 			require("yatline"):setup({
