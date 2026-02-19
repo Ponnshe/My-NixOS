@@ -103,30 +103,22 @@ in
       };
 
       # Ventanas específicas
-      windowrulev2 = [
-        "workspace 3 silent, class:Emacs"
-        "workspace 2 silent, class:Vivaldi-stable"
-				"workspace 2 silent, class:^(org.qutebrowser.qutebrowser)$"
-        "workspace 1, class:foot"
-        "workspace 3 silent, fullscreen class:sioyek"
+      windowrule = [
+        "match:class Emacs, workspace 3 silent"
+        "match:class Vivaldi-stable, workspace 2 silent"
+				"match:class ^(org.qutebrowser.qutebrowser)$, workspace 2 silent"
+        "match:class foot, workspace 1"
+        "match:class sioyek, workspace 3 silent, fullscreen on"
 
 				#My file editor rules
-				"float, class:^my-file-editor"
-				"center, class:^(my-file-editor)$"
-				"dimaround, class:^(my-file-editor)$"
-				"size 80% 80%, class:^(my-file-editor)$"
+				"match:class ^my-file-editor, float on, center on, dim_around on, size monitor_w*0.8 monitor_h*0.8"
 
 				#imv rules
-				"float, class:^imv"
-				"center, class:^(imv)$"
-				"dimaround, class:^(imv)$"
-				"size 80% 80%, class:^(imv)$"
+				"match:class ^imv, float on, center on, dim_around on, size monitor_w*0.8 monitor_h*0.8"
       ];
 
 			layerrule = [
-			 "blur, wofi"
-			 "ignorezero, wofi"
-			 "dimaround, wofi"
+				"match:namespace wofi, dim_around on"
 			];
 
       bind = [
@@ -194,6 +186,7 @@ in
       exec-once = [
         "bash ${scriptsPath}/utils/start.sh"
         "bash ~/scripts/clean_auto_saves.sh"
+				"hyprsunset"
       ];
     };
 
@@ -204,12 +197,12 @@ in
     settings = {
 			profile = [
         {
-          time = "06:00";
+          time = "09:00";
           temperature = 6500;
           gamma = 1.0;
         }
         {
-          time = "19:00";
+          time = "22:00";
           temperature = 3500;
           gamma = 0.8;
         }
