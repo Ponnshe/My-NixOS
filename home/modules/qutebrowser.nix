@@ -43,7 +43,7 @@
 			"tabs.show" = "multiple";
       "tabs.favicons.show" = "always";
       "tabs.title.format" = "{index}: {audio}{current_title}";
-      "editor.command" = [ "emacsclient" "-c" "{}" ]; # Tu Emacs
+			"editor.command" = ["foot" "-a" "my-file-editor" "emacsclient" "-nw" "{}"];
       "content.blocking.method" = "both";
 
       # --- Colores de Enlaces y UI ---
@@ -94,12 +94,13 @@
 
     # --- Persistencia de la solución de Google ---
     extraConfig = ''
-      # Definimos el UA que te funcionó
-      ua_google = "Mozilla/5.0 ({os_info}; rv:135.0) Gecko/20100101 Firefox/135"
+# Definimos el UA que te funcionó
+ua_google = "Mozilla/5.0 ({os_info}; rv:135.0) Gecko/20100101 Firefox/135"
       
-      # Aplicar a login y a todo el ecosistema Google para evitar el error de "No puedes acceder"
-      config.set('content.headers.user_agent', ua_google, 'https://accounts.google.com/*')
-      config.set('content.headers.user_agent', ua_google, 'https://*.google.com/*')
+# Aplicar a login y a todo el ecosistema Google para evitar el error de "No puedes acceder"
+config.set('content.headers.user_agent', ua_google, 'https://accounts.google.com/*')
+config.set('content.headers.user_agent', ua_google, 'https://*.google.com/*')
+config.set('input.insert_mode.auto_load', True)
     '';
   };
 }
