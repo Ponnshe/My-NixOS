@@ -12,65 +12,55 @@
       let
         overlays = [ (import rust-overlay) ];
         pkgs = import nixpkgs { inherit system overlays; };
-
-        # 1. Configuración de Rust
-        # Incluimos 'rust-src' obligatoriamente para que rust-analyzer pueda
-        # navegar al código fuente de la std lib (syscalls, fs, io, etc).
         rust-toolchain = pkgs.rust-bin.stable.latest.default.override {
           extensions = [ "rust-src" "clippy" "rustfmt" ];
         };
-
       in {
         devShells.default = pkgs.mkShell {
           name = "low-level-shell";
 
-          # 2. Dependencias de compilación nativas
-          # A veces necesarias si compilas crates que wrappean librerías de C (como openssl-sys)
           nativeBuildInputs = with pkgs; [
             pkg-config
           ];
 
-          # 3. Paquetes del entorno
           packages = with pkgs; [
+            # --- Herramientas de Construcción y LSP ---
+            bear         # LA PIEZA QUE FALTA
+            llvmPackages_20.clang-tools
+            gcc
+            gnumake
+            cmake
+            glibc.dev
+
             # --- Rust ---
             rust-toolchain
             rust-analyzer
 
-            # --- C / C++ Toolchain ---
-            gcc          # El compilador estándar (puedes cambiarlo por clang)
-            gnumake      # Para Makefiles
-            cmake        # Build system común en C/C++
-						llvmPackages_20.clang-tools
+            # --- Debugging ---
+            gdb
+            valgrind
+            strace
+            ltrace
+            binutils
 
-            # --- Depuración y Análisis (CRÍTICO para bajo nivel) ---
-            gdb          # El depurador estándar de GNU
-            valgrind     # Para detectar memory leaks en C
-            strace       # Muestra las syscalls que hace tu programa (útil para ver el fork)
-            ltrace       # Muestra las llamadas a librerías dinámicas
-            binutils     # Herramientas: objdump (ver asm), readelf, nm, size
-
-            # --- Documentación ---
-            man-pages    # Manuales de Linux (necesario para 'man fork', 'man 2 write', etc.)
-            man-db       # El visor de manuales
+            # --- Docs ---
+            man-pages
+            man-db
+            man-pages-posix
           ];
 
-          # 4. Variables de Entorno
           env = {
             RUST_BACKTRACE = "1";
-            
-            # Ayuda a rust-analyzer y editores a encontrar el código fuente de Rust
             RUST_SRC_PATH = "${rust-toolchain}/lib/rustlib/src/rust/library";
-            
-            # Asegura que pkg-config encuentre las librerías del sistema
-            PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
+            # Importante para que clangd encuentre los headers de la glibc en NixOS
+            CPATH = "${pkgs.glibc.dev}/include";
+            C_INCLUDE_PATH = "${pkgs.glibc.dev}/include";
+            MANPATH = "${pkgs.man-pages}/share/man:${pkgs.man-pages-posix}/share/man:$MANPATH";
           };
 
-          # Mensaje de bienvenida opcional
           shellHook = ''
-            echo "🛠️  Entorno Low Level Activado"
-            echo "   - Rust $(rustc --version)"
-            echo "   - GCC $(gcc --version | head -n1)"
-            echo "   - Usa 'strace ./tu_programa' para ver las syscalls"
+            echo "🛠️ Entorno Low Level Activado con Bear"
+            echo "Usa: 'bear -- gcc archivo.c' para generar el compile_commands.json"
           '';
         };
       });
