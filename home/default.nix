@@ -17,14 +17,8 @@
     pkgs.slurp
     pkgs.wl-clipboard
     pkgs.vlc
-    pkgs.ffmpeg_6-full
-    pkgs.droidcam
-    pkgs.helvum
     pkgs.man-pages
-		pkgs.wkhtmltopdf
-    pkgs.nodePackages.mermaid-cli
 		pkgs.lsd
-		pkgs.tectonic
 
 		pkgs.libxkbcommon
 		pkgs.wayland
@@ -41,13 +35,15 @@
 		pkgs.nix-prefetch
 		pkgs.nix-prefetch-github
 
-		pkgs.pandoc
     # Algunos paquetes útiles globalmente para scripts rápidos, aunque idealmente deberían ir en flakes
     pkgs.jq
     pkgs.ripgrep
     pkgs.fd
 
 		pkgs.zotero
+
+		pkgs.ani-cli
+		pkgs.flix-cli
   ]; 
 
   imports = [
@@ -56,7 +52,6 @@
 		"${myModulesPath}/mpv.nix"
 		"${myModulesPath}/nvim.nix"
 		"${myModulesPath}/hyprland.nix"
-		"${myModulesPath}/intellij.nix"
 		"${myModulesPath}/sioyek.nix"
 		"${myModulesPath}/yazi.nix"
 		"${myModulesPath}/ripgrep.nix"

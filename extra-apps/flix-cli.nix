@@ -1,8 +1,13 @@
 { lib
 , python313Packages
 , src
+, catt
+, makeWrapper
 }:
 
+let
+  catt-module = python313Packages.toPythonModule catt;
+in
 python313Packages.buildPythonApplication {
   pname = "flix-cli";
   version = "1.8.1.17";
@@ -10,15 +15,21 @@ python313Packages.buildPythonApplication {
 
   inherit src;
 
-  # Hatchling es indispensable para este pyproject.toml
+  # Parcheamos el archivo de proyecto antes de que empiece la construcción
+  postPatch = ''
+    # Cambiamos las restricciones estrictas (==) por flexibles (>=)
+    # Esto soluciona el error de "not satisfied by version X.X.X"
+    sed -i 's/==/>=/g' pyproject.toml
+  '';
+
   nativeBuildInputs = with python313Packages; [
     hatchling
+    makeWrapper
   ];
 
-  # Mapeo directo de dependencias usando Python 3.13
   propagatedBuildInputs = with python313Packages; [
     beautifulsoup4
-    catt
+    catt-module
     httpx
     krfzf-py
     platformdirs
@@ -27,7 +38,11 @@ python313Packages.buildPythonApplication {
     yt-dlp
   ];
 
-  # Evitamos tests que puedan requerir red o archivos inexistentes en el build sandbox
+  postInstall = ''
+    wrapProgram $out/bin/flix-cli \
+      --prefix PATH : ${lib.makeBinPath [ catt ]}
+  '';
+
   doCheck = false;
 
   meta = with lib; {
