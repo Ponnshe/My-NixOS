@@ -103,7 +103,6 @@ in
     waybar.enable = true;
     xfconf.enable = true;
     wshowkeys.enable = true;
-		adb.enable = true;
 		wireshark.enable = true;
 		wireshark.package = pkgs.wireshark;
   };
@@ -231,12 +230,9 @@ in
 			wireshark
 			termshark
 
-      plantuml
-
       powertop
       usbutils
       graphviz
-      ffmpeg
 
       #Sensores de temp, fans, etc
       lm_sensors
@@ -262,11 +258,6 @@ in
       wl-clipboard
 
       git
-      picom		#transparency
-
-      nitrogen 	#Ver fotos
-
-      kitty 		#terminal
 
       #Notificaciones
       dunst 	#Interfaz
@@ -300,13 +291,6 @@ in
       grim         	 #Tomar capturas de pantalla
       wget	     	 #Obtener Archivos desde la red
       slurp		 #Complemento para capturar pantalla. Coords
-
-      #Misc
-      neofetch	#Mensaje de bienvenida consola
-      cowsay		
-      lolcat
-      fortune
-
   ];
 
   fonts.packages= with pkgs; [
