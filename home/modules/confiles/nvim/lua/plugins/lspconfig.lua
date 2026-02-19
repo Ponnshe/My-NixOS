@@ -18,10 +18,22 @@ return {
 			}
 		})
 
-    -- C/C++
-    vim.lsp.config('clangd', {
-      capabilities = capabilities,
+		vim.lsp.config('clangd', {
+				capabilities = capabilities,
+				cmd = {
+						"clangd",
+						"--header-insertion=iwyu",
+						"--header-insertion-decorators",
+						"--background-index",
+						"--completion-style=detailed",
+						"--all-scopes-completion", -- FUNDAMENTAL para waitpid
+						"--query-driver=/nix/store/*/bin/gcc,/nix/store/*/bin/clang",
+				},
+				-- Forzamos la ejecución del buscador de raíz que ya comprobaste que funciona
+				root_dir = require('lspconfig.util').root_pattern("compile_commands.json", ".git", ".clangd")(vim.api.nvim_buf_get_name(0)),
 		})
+
+		vim.lsp.enable('clangd')
 
     -- Web stack
     vim.lsp.config('ts_ls', {
