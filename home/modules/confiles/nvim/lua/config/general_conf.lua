@@ -39,4 +39,3 @@ vim.api.nvim_create_autocmd("VimEnter", {
     vim.cmd("hi CursorLine gui=underline cterm=underline")
   end,
 })
-

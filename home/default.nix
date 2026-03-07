@@ -5,6 +5,7 @@
 
   programs.home-manager.enable = true;
   home.stateVersion = "25.05";
+  fonts.fontconfig.enable = true;
 
   home.packages = [ 
 		pkgs.brave
@@ -44,6 +45,7 @@
 
 		pkgs.ani-cli
 		pkgs.flix-cli
+    pkgs.nerd-fonts.hack
   ]; 
 
   imports = [
@@ -68,6 +70,7 @@
 		"${myModulesPath}/imv.nix"
 		"${myModulesPath}/gemini-cli.nix"
 		"${myModulesPath}/direnv.nix"
+		"${myModulesPath}/emacs.nix"
   ];
 
 	home.sessionVariables = {

@@ -5,8 +5,7 @@ return {
     opts = {
       tools = {
         picker = "telescope",
-      },
-      server = {
+      }, server = {
         -- Keymaps buffer-local opcionales en on_attach
         default_settings = {
           ["rust-analyzer"] = {

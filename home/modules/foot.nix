@@ -4,7 +4,7 @@
     enable = true;
     settings = {
       main = {
-        font = "Hack Nerd Font:size=12"; # ajusta si usas otra fuente
+        font = "Hack Nerd Font:size=16"; # ajusta si usas otra fuente
         pad = "10x10 center";
       };
 

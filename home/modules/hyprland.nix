@@ -111,10 +111,11 @@ in
         "match:class sioyek, workspace 3 silent, fullscreen on"
 
 				#My file editor rules
-				"match:class ^my-file-editor, float on, center on, dim_around on, size monitor_w*0.8 monitor_h*0.8"
+				"match:class ^my-file-editor, workspace special:magic, float on, center on, dim_around on, size monitor_w*0.8 monitor_h*0.8"
+				"match:title ^my-file-editor, workspace special:magic, float on, center on, dim_around on, size monitor_w*0.8 monitor_h*0.8"
 
 				#imv rules
-				"match:class ^imv, float on, center on, dim_around on, size monitor_w*0.8 monitor_h*0.8"
+				"match:class ^imv, workspace special:magic, float on, center on, dim_around on, size monitor_w*0.8 monitor_h*0.8"
       ];
 
 			layerrule = [

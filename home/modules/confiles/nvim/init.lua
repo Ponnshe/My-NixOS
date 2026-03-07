@@ -24,6 +24,10 @@ require("config.keymaps")
 -- 5. Cargar Lazy.nvim con tu carpeta de plugins
 require("lazy").setup("plugins", {
     install_path = vim.fn.stdpath("data") .. "/lazy",  -- normalmente ~/.local/share/nvim/lazy
+		rocks = {
+			enabled = false,
+			hererocks = false,
+		},
 })
 
 -- 6. Mensaje opcional si extra_rtp no está configurado

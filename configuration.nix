@@ -251,7 +251,7 @@ in
       firefox 
       vivaldi
 
-      emacs
+      #emacs
 
       jq			#Json Proccessor?
       xdg-desktop-portal	#Interfaz de apps para interactuar con el sistema

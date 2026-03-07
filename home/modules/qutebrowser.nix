@@ -1,5 +1,12 @@
 { pkgs, ... }:
-
+let
+  # Creamos un script que maneja el lanzamiento de Emacs sin errores de escape
+  qute-editor = pkgs.writeShellScript "qute-emacs-editor" ''
+    # -c crea un frame GUI (arregla el portapapeles)
+    # -F define el nombre del frame para Hyprland
+    exec ${pkgs.emacs}/bin/emacsclient -c -F "((name . \"my-file-editor\"))" "$@"
+  '';
+in
 {
   programs.qutebrowser = {
     enable = true;
@@ -43,7 +50,8 @@
 			"tabs.show" = "multiple";
       "tabs.favicons.show" = "always";
       "tabs.title.format" = "{index}: {audio}{current_title}";
-			"editor.command" = ["foot" "-a" "my-file-editor" "emacsclient" "-nw" "{}"];
+#			"editor.command" = ["foot" "-a" "my-file-editor" "emacsclient" "-nw" "{}"];
+			"editor.command" = [ "${qute-editor}" "{}" ];
       "content.blocking.method" = "both";
 
       # --- Colores de Enlaces y UI ---
@@ -102,5 +110,21 @@ config.set('content.headers.user_agent', ua_google, 'https://accounts.google.com
 config.set('content.headers.user_agent', ua_google, 'https://*.google.com/*')
 config.set('input.insert_mode.auto_load', True)
     '';
+  };
+
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "text/html" = "org.qutebrowser.qutebrowser.desktop";
+      "x-scheme-handler/http" = "org.qutebrowser.qutebrowser.desktop";
+      "x-scheme-handler/https" = "org.qutebrowser.qutebrowser.desktop";
+      "x-scheme-handler/about" = "org.qutebrowser.qutebrowser.desktop";
+      "x-scheme-handler/unknown" = "org.qutebrowser.qutebrowser.desktop";
+    };
+  };
+
+  # Variable de entorno para scripts y terminal
+  home.sessionVariables = {
+    BROWSER = "qutebrowser";
   };
 }
