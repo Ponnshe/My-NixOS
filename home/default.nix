@@ -26,11 +26,11 @@
 		pkgs.wayland-protocols
 		pkgs.wlroots
 
-		pkgs.xorg.libX11
-		pkgs.xorg.libXcursor
-		pkgs.xorg.libXrandr
+		pkgs.libX11
+		pkgs.libXcursor
+		pkgs.libXrandr
 
-		pkgs.xorg.libXi
+		pkgs.libXi
 
 		# Nix-prefetc
 		pkgs.nix-prefetch

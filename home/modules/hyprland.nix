@@ -146,9 +146,9 @@ in
         "$mainMod SHIFT, S, exec, ${scriptsPath}/utils/screenshot.sh"
         "$mainMod SHIFT, R, exec, reboot"
 
-        #Brightness
-        ", XF86MonBrightnessUp, exec, light -A 10"
-        ", XF86MonBrightnessDown, exec, light -U 10"
+				# Brightness
+				", XF86MonBrightnessUp, exec, brightnessctl set 10%+"
+				", XF86MonBrightnessDown, exec, brightnessctl set 10%-"
 
         # Change windows position
         "$mainMod CTRL, l, swapwindow, r"

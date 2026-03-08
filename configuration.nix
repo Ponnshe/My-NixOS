@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 let
     xenlism-grub-theme = pkgs.fetchFromGitHub
     {
@@ -16,6 +16,7 @@ in
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+			inputs.sops-nix.nixosModules.sops # Importa el módulo de sops
       #./hosts.nix
     ];
 
@@ -99,7 +100,6 @@ in
       enable = true;
       xwayland.enable = true;
     };
-    light.enable = true;
     waybar.enable = true;
     xfconf.enable = true;
     wshowkeys.enable = true;
@@ -107,6 +107,36 @@ in
 		wireshark.package = pkgs.wireshark;
   };
 
+	sops = {
+    defaultSopsFile = ./secrets.yaml;
+    validateSopsFiles = false;
+    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ]; # Usa tu llave SSH
+    
+    # Define los secretos que NixOS va a descifrar en /run/secrets/
+    secrets = {
+			double_puppet_token = { owner = "root"; mode = "0444"; };
+    };
+		templates."doublepuppet.yaml".content = ''
+			id: doublepuppet
+			url:
+			as_token: ${config.sops.placeholder.double_puppet_token}
+			hs_token: token_basura_no_importa
+			sender_localpart: doublepuppet
+			rate_limited: false
+			namespaces:
+				users:
+				- regex: '@.*:localhost'
+					exclusive: false
+		'';
+		templates."whatsapp-env".content = ''
+			WA_double_puppet__secrets__localhost=as_token:${config.sops.placeholder.double_puppet_token}
+		'';
+  };
+
+	systemd.tmpfiles.rules = [
+    "d /var/lib/matrix-conduit/appservices 0750 conduit conduit -"
+    "L+ /var/lib/matrix-conduit/appservices/doublepuppet.yaml - - - - ${config.sops.templates."doublepuppet.yaml".path}"
+  ];
 
   # Hardware Module
   hardware = {
@@ -205,6 +235,7 @@ in
     allowUnfree = true;
     allowUnsupportedSystem = true;
     permittedInsecurePackages = [
+			"olm-3.2.16" # For mautrix-whatsapp
     ];
   };
 
@@ -225,6 +256,10 @@ in
 
   #Packages
   environment.systemPackages = with pkgs; [
+			nheko
+			matrix-conduit
+			matrix-commander
+
 	    xterm
 			xhost
 			wireshark
@@ -291,6 +326,11 @@ in
       grim         	 #Tomar capturas de pantalla
       wget	     	 #Obtener Archivos desde la red
       slurp		 #Complemento para capturar pantalla. Coords
+
+			# Seguridad
+			sops
+			age
+			ssh-to-age
   ];
 
   fonts.packages= with pkgs; [
@@ -322,6 +362,7 @@ in
       jack.enable = true;
       wireplumber.enable = true;
     };
+
     blueman.enable = true;
     xserver = {
       enable = true;
@@ -331,7 +372,9 @@ in
         options = "ctrl:nocaps";
       };
     };
+
     auto-cpufreq.enable = true;
+
     udev.extraRules = ''
       SUBSYSTEM=="usb", ATTR{idVendor}=="xxxx", MODE="0666", GROUP="plugdev"
     '';
@@ -356,6 +399,60 @@ in
 		dbus = {
 		  enable = true;
 		};
+
+		matrix-conduit = {
+			enable = true;
+			extraEnvironment = {
+				"CONDUIT_LOG" = "debug"; # Cambiamos de 'warn' o 'info' a 'debug'
+			};
+			settings.global = {
+				address = "0.0.0.0";
+				port = 6167;
+				server_name = "localhost";
+			};
+		};
+
+		mautrix-whatsapp = {
+			enable = true;
+			environmentFile = config.sops.templates."whatsapp-env".path;
+
+			settings = {
+				env_config_prefix = "WA_";
+
+				double_puppet = {
+					secrets = {
+						"localhost" = "dummy";
+					};
+				};
+
+				homeserver = {
+					address = "http://localhost:6167";
+					domain = "localhost";
+				};
+
+				bridge = {
+					permissions = pkgs.lib.mkForce {
+						"@ponnshe:localhost" = "admin";
+					};
+					auto_join_invites = true;
+					federate_rooms = false; # Como es local, mejor déjalo en false
+				};
+
+				logging = {
+					level = "info";
+				};
+			};
+		};
+
+		caddy = {
+			enable = true;
+			virtualHosts."192.168.0.17" = { # Tu IP local
+				extraConfig = ''
+					reverse_proxy localhost:6167
+					tls internal
+				'';
+			};
+		};
   };
 
   # Open ports in the firewall.
@@ -366,7 +463,7 @@ in
 	networking.firewall = {
     enable = true;
     allowedUDPPorts = [ 5005 ];
-    # allowedTCPPorts = [ 80 443 ];  # Ejemplo para TCP si lo necesitaras
+    allowedTCPPorts = [ 6167 443 80 ];  # Ejemplo para TCP si lo necesitaras
   };
 
   # This value determines the NixOS release from which the default
