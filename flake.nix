@@ -17,9 +17,21 @@
 			url = "git+https://codeberg.org/s-warn/flix-cli.git";
 			flake = false;
 		};
+
+		sops-nix.url = "github:Mic92/sops-nix";
+
+		emacs-overlay.url = "github:nix-community/emacs-overlay";
 	}; 
 
-	outputs = { nixpkgs, home-manager, flix-src, antigravity-nix, ... }@inputs: 
+	outputs = {
+		nixpkgs,
+		home-manager,
+		sops-nix,
+		flix-src,
+		antigravity-nix,
+		emacs-overlay,
+		...
+	}@inputs:
 	let
     # Nota: Ajusta las rutas si tu estructura de carpetas es distinta desde la raíz del flake
 		system = "x86_64-linux";
@@ -44,6 +56,7 @@
 
 				{
 					nixpkgs.overlays = [
+						emacs-overlay.overlays.default
 						(final: prev: {
 							flix-cli = final.callPackage ./extra-apps/flix-cli.nix { 
 								src = flix-src; 
