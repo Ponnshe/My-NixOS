@@ -13,5 +13,7 @@ nm-applet --indicator &
 foot &
 #Status Bar
 waybar &
-#Emacs
-emacs &
+# Emacs Client
+emacsclient -c &
+#Qutebrowser
+qutebrowser &

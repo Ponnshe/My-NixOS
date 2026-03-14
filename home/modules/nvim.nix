@@ -22,8 +22,12 @@
     enable = true;
     viAlias = true;
     vimAlias = true;
+		withPython3 = true;
+		withNodeJs = true;
+		withRuby = true;
 
 		extraLuaConfig = ''
+			vim.g.python3_host_prog = vim.fn.exepath("python3")
 			local lazy_path = vim.fn.expand("~/.config/nvim/lazy/lazy.nvim")
 			vim.opt.rtp:prepend(lazy_path)
 			vim.opt.runtimepath:prepend("${confilePath}/nvim")

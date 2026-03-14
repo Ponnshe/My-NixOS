@@ -1,27 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, confilePath, ... }:
 
-let
-  # Tu wrapper actual para dependencias externas está bien
-  emacsWithBabelDeps = pkgs.symlinkJoin {
-    name = "emacs-with-babel-deps";
-    paths = [ pkgs.emacs30 ]; 
-    buildInputs = [ pkgs.makeWrapper ];
-    postBuild = ''
-      wrapProgram $out/bin/emacs \
-        --prefix PATH : ${pkgs.lib.makeBinPath [ 
-          pkgs.jre 
-          pkgs.plantuml 
-          pkgs.graphviz 
-          pkgs.mermaid-cli
-        ]}
-    '';
-		meta = pkgs.emacs30.meta;
-  };
-in
 {
   programs.emacs = {
     enable = true;
-    package = emacsWithBabelDeps;
     extraPackages = epkgs: with epkgs; [
       use-package
       quelpa
@@ -37,11 +18,14 @@ in
       counsel-projectile
       org-roam
       org-roam-ui
+			org-modern
       mermaid-mode
       ob-mermaid
+			openwith
       ob-go
       ob-rust
       ob-typescript
+			sudo-edit
       rustic
       doom-themes
       doom-modeline
@@ -52,16 +36,59 @@ in
       dired-preview
       which-key
       dashboard
-      pdf-tools
       prettier
       visual-fill-column
       org-download
-      org-notify
       citar
       bibtex-completion
       ivy-bibtex
       org-roam-bibtex
 			rand-theme
+			vterm
+			plantuml-mode
     ];
   };
+
+	services.emacs = {
+    enable = true;
+    client.enable = true;
+		startWithUserSession = "graphical";
+  };
+
+	home.packages = with pkgs; [
+    jre
+    plantuml
+    graphviz
+    mermaid-cli
+    sqlite
+		cmake
+		libtool
+		libgcc
+  ];
+
+	home.file.".emacs.d" = {
+    source = "${confilePath}/emacs";
+    recursive = true;
+  };
+
+	home.file.".emacs.d/nix-env.el".text = ''
+    ;; ARCHIVO AUTOGENERADO POR NIX - NO EDITAR A MANO
+    ;; Inyecta dependencias puras en el entorno de Emacs sin contaminar el sistema
+
+    (setenv "PATH" (concat "${pkgs.lib.makeBinPath [ 
+      pkgs.jre 
+      pkgs.plantuml 
+      pkgs.graphviz 
+      pkgs.mermaid-cli 
+      pkgs.sqlite 
+    ]}:" (getenv "PATH")))
+
+    (setq exec-path (append '(
+      "${pkgs.jre}/bin"
+      "${pkgs.plantuml}/bin"
+      "${pkgs.graphviz}/bin"
+      "${pkgs.mermaid-cli}/bin"
+      "${pkgs.sqlite}/bin"
+    ) exec-path))
+  '';
 }

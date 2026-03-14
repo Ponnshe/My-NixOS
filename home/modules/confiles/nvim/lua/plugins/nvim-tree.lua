@@ -17,7 +17,9 @@ return {
 				"javascript",
 				"nix",
 				"clojure",
-				"sql"
+				"sql",
+				"markdown",
+				"markdown_inline"
 				-- Agrega aquí los lenguajes que realmente usás
 			},
 			highlight = {
