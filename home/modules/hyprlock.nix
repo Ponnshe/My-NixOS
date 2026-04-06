@@ -1,0 +1,43 @@
+
+# home.nix o módulos de HM
+
+{ config, pkgs, scriptsPath, ... }:
+{
+	programs.hyprlock = {
+		enable = true;
+		settings = {
+			general = {
+				disable_loading = true;
+				grace = 0;
+				hide_cursor = true;
+			};
+
+			background = [
+				{
+					path = "/home/ponnshe/Home/Wallpapers/purpleRain.png"; # Solo png soportado nativamente
+					color = "rgba(25, 20, 20, 1.0)";
+					blur_passes = 2;
+				}
+			];
+
+			input-field = [
+				{
+					size = "200, 50";
+					outline_thickness = 3;
+					dots_size = 0.33;
+					dots_spacing = 0.15;
+					dots_center = true;
+					outer_color = "rgb(151515)";
+					inner_color = "rgb(200, 200, 200)";
+					font_color = "rgb(10, 10, 10)";
+					fade_on_empty = true;
+					placeholder_text = "<i>Input Password...</i>";
+					hide_input = false;
+					position = "0, -20";
+					halign = "center";
+					valign = "center";
+				}
+			];
+		};
+	};
+}
