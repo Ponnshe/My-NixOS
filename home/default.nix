@@ -1,13 +1,13 @@
 { config, pkgs, lib, scriptsPath, myModulesPath, confilePath, ... }:
 {
-  home.username = "ponnshe";
-  home.homeDirectory = "/home/ponnshe";
+  home.username = "ponnshe"; home.homeDirectory = "/home/ponnshe";
 
   programs.home-manager.enable = true;
   home.stateVersion = "25.05";
   fonts.fontconfig.enable = true;
 
   home.packages = [ 
+		pkgs.pipe-viewer
 		pkgs.brave
 		pkgs.appimage-run
 		pkgs.alsa-lib
@@ -44,8 +44,10 @@
 		pkgs.zotero
 
 		pkgs.ani-cli
-		pkgs.flix-cli
     pkgs.nerd-fonts.hack
+		pkgs.chafa
+		pkgs.figlet
+		pkgs.lolcat
   ]; 
 
   imports = [
@@ -71,6 +73,13 @@
 		"${myModulesPath}/gemini-cli.nix"
 		"${myModulesPath}/direnv.nix"
 		"${myModulesPath}/emacs.nix"
+		"${myModulesPath}/hyprlock.nix"
+		"${myModulesPath}/yt-dlp.nix"
+		"${myModulesPath}/aria2.nix"
+		"${myModulesPath}/anki.nix"
+		"${myModulesPath}/freetube.nix"
+		"${myModulesPath}/tidal-interface.nix"
+		"${myModulesPath}/browsers.nix"
   ];
 
 	home.sessionVariables = {
@@ -80,6 +89,7 @@
 
 	home.sessionPath = [
 		"${scriptsPath}/utils"
+		"${config.home.homeDirectory}/.opencode/bin"
 	];
 	xdg.desktopEntries.anytype = {
     name = "Anytype";

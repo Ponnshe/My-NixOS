@@ -52,6 +52,7 @@
 (load (expand-file-name "config/ob-mermaid.el" user-emacs-directory))
 
 (load (expand-file-name "config/sudo-edit.el" user-emacs-directory))
+(load (expand-file-name "config/eww.el" user-emacs-directory))
 ;; Aesthetics
 (load (expand-file-name "config/doom-modeline.el" user-emacs-directory))
 (load (expand-file-name "config/rand-theme.el" user-emacs-directory))

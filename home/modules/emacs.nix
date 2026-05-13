@@ -64,6 +64,10 @@
 		cmake
 		libtool
 		libgcc
+		(texlive.combined.scheme-medium.withPackages (ps: with ps; [
+			dvipng
+			dvisvgm
+		]))
   ];
 
 	home.file.".emacs.d" = {
@@ -71,7 +75,11 @@
     recursive = true;
   };
 
-	home.file.".emacs.d/nix-env.el".text = ''
+	home.file.".emacs.d/nix-env.el".text = 
+let
+  tex = pkgs.texlive.combined.scheme-medium;
+in
+	''
     ;; ARCHIVO AUTOGENERADO POR NIX - NO EDITAR A MANO
     ;; Inyecta dependencias puras en el entorno de Emacs sin contaminar el sistema
 
@@ -81,6 +89,7 @@
       pkgs.graphviz 
       pkgs.mermaid-cli 
       pkgs.sqlite 
+			tex
     ]}:" (getenv "PATH")))
 
     (setq exec-path (append '(
@@ -89,6 +98,7 @@
       "${pkgs.graphviz}/bin"
       "${pkgs.mermaid-cli}/bin"
       "${pkgs.sqlite}/bin"
+			"${tex}/bin"
     ) exec-path))
   '';
 }

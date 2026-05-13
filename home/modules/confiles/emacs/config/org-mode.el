@@ -5,7 +5,9 @@
   (column-number-mode 1)
   (setq-local org-src-preserve-indentation t)
   (setq-local org-src-tab-acts-natively t)
-  (setq-local org-src-fontify-natively t))
+  (setq-local org-src-fontify-natively t)
+	(setq org-preview-latex-default-process 'dvisvgm)
+	)
 
 (defun efs/org-mode-visual-fill ()
   (setq visual-fill-column-width 100
@@ -23,8 +25,6 @@
         '("~/Home/Personal/Life/Tasks.org"
           "~/Home/Personal/Life/Habits.org"
           "~/Home/Personal/Life/calendars"
-          "~/Home/Personal/org-mind/grimorio/proyectos"
-          "~/Home/Personal/org-mind/journal/"
           "/home/ponnshe/Home/Personal/org-mind/20251226230713-life_2026.org"))
   :config
   (setq org-M-RET-may-split-line nil)

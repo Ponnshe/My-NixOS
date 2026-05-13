@@ -1,4 +1,4 @@
-{ config, pkgs, myModulesPath, confilePath, ... }:
+{ config, pkgs, ... }:
 {
   programs.btop= {
     enable = true;

@@ -13,10 +13,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-		flix-src = {
-			url = "git+https://codeberg.org/s-warn/flix-cli.git";
-			flake = false;
-		};
+		luffy.url = "github:DemonKingSwarn/luffy";
 
 		sops-nix.url = "github:Mic92/sops-nix";
 
@@ -27,9 +24,9 @@
 		nixpkgs,
 		home-manager,
 		sops-nix,
-		flix-src,
 		antigravity-nix,
 		emacs-overlay,
+		luffy,
 		...
 	}@inputs:
 	let
@@ -55,14 +52,6 @@
 				home-manager.nixosModules.home-manager # Módulo de home-manager en la configuración de NixOS
 
 				{
-					nixpkgs.overlays = [
-						emacs-overlay.overlays.default
-						(final: prev: {
-							flix-cli = final.callPackage ./extra-apps/flix-cli.nix { 
-								src = flix-src; 
-							};
-						})
-					];
 
 					home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
@@ -74,6 +63,7 @@
 
           environment.systemPackages = [
             inputs.antigravity-nix.packages.x86_64-linux.default
+						inputs.luffy.packages.${system}.luffy
           ];
           nixpkgs.config.allowUnfree = true;
         }

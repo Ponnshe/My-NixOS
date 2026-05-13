@@ -14,7 +14,11 @@ notify_and_lock() {
 
   notify-send -u critical "⚠️ Acción requerida" "$msg"
   sleep 5
-  swaylock -f
+
+  # Solo intentamos bloquear si no hay un swaylock ya activo
+  if ! pgrep -x "swaylock" > /dev/null; then
+      swaylock -c 000000
+  fi
 
   while true; do
     local capacity=$(cat "$BAT_PATH/capacity")
@@ -27,7 +31,9 @@ notify_and_lock() {
     fi
 
     sleep 3
-    swaylock -f  # relock por si desbloqueó sin cumplir
+    if ! pgrep -x "swaylock" > /dev/null; then
+        swaylock -c 000000
+    fi
   done
 }
 

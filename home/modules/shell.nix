@@ -17,6 +17,8 @@
 
 	home.sessionVariables = {
 	  EDITOR = "nvim";
+		NIX_LD = "${pkgs.glibc}/lib/ld-linux-x86-64.so.2";
+    NIX_LD_LIBRARY_PATH = "/run/current-system/sw/share/nix-ld/lib";
 	};
 
   imports = [

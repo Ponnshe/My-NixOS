@@ -25,6 +25,7 @@ in
     };
 
     settings = {
+			"zoom.default" = 150;
 			"qt.args" = [ "disable-features=Translate" ];
 
       # --- Comportamiento y Google ---
@@ -46,8 +47,8 @@ in
       "colors.webpage.darkmode.algorithm" = "lightness-cielab"; 
 
       # --- Interfaz (Tabs y Editor) ---
-      "tabs.position" = "top";
-			"tabs.show" = "multiple";
+      "tabs.position" = "left";
+			"tabs.show" = "switching";
       "tabs.favicons.show" = "always";
       "tabs.title.format" = "{index}: {audio}{current_title}";
 #			"editor.command" = ["foot" "-a" "my-file-editor" "emacsclient" "-nw" "{}"];

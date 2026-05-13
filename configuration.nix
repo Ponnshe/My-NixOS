@@ -105,6 +105,19 @@ in
     wshowkeys.enable = true;
 		wireshark.enable = true;
 		wireshark.package = pkgs.wireshark;
+		nix-ld = { 
+			enable = true;
+			libraries = with pkgs; [
+				stdenv.cc.cc
+				zlib
+				fuse3
+				openssl
+				icu
+				nss
+				glib
+				# Agrega aquí cualquier otra lib que opencode pida en el futuro
+			];
+		};
   };
 
 	sops = {

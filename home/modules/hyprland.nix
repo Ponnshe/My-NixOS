@@ -116,6 +116,8 @@ in
 
 				#imv rules
 				"match:class ^imv, workspace special:magic, float on, center on, dim_around on, size monitor_w*0.8 monitor_h*0.8"
+
+				"match:class ^pomo-break, fullscreen on, stay_focused on, monitor eDP-1"
       ];
 
 			layerrule = [
@@ -189,6 +191,12 @@ in
         "bash ~/scripts/clean_auto_saves.sh"
 				"hyprsunset"
       ];
+
+			extraConfig = ''
+        submap = break
+        bind = CONTROL SHIFT, Escape, submap, reset
+        submap = reset
+      '';
     };
 
   };
