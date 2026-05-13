@@ -12,8 +12,6 @@
 	};
 
 	home.packages = with pkgs; [
-		surf
-		dillo
 		dillo-plus
 		netsurf-browser
 	];

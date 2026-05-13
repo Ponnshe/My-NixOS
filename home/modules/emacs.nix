@@ -46,6 +46,8 @@
 			rand-theme
 			vterm
 			plantuml-mode
+			elfeed
+			elfeed-org
     ];
   };
 

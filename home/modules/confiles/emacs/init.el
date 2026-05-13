@@ -17,6 +17,9 @@
 (load (expand-file-name "config/use-package.el" user-emacs-directory)) ;;Package manager 
 (setq org-image-actual-width '(300))
 
+;; Research
+(load (expand-file-name "config/elfeed.el" user-emacs-directory))
+
 ;; UI and base config
 (load (expand-file-name "config/general.el" user-emacs-directory))
 
@@ -53,6 +56,7 @@
 
 (load (expand-file-name "config/sudo-edit.el" user-emacs-directory))
 (load (expand-file-name "config/eww.el" user-emacs-directory))
+
 ;; Aesthetics
 (load (expand-file-name "config/doom-modeline.el" user-emacs-directory))
 (load (expand-file-name "config/rand-theme.el" user-emacs-directory))

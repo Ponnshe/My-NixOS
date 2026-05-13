@@ -8,7 +8,7 @@
         pad = "10x10 center";
       };
 
-      colors = {
+      colors-dark = {
         foreground = "f8f8f2";
         background = "1a1a1f";
         selection-foreground = "ffffff";
