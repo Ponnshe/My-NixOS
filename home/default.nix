@@ -51,6 +51,7 @@
   ]; 
 
   imports = [
+		# Programs
 		"${myModulesPath}/shell.nix"
 		"${myModulesPath}/foot.nix"
 		"${myModulesPath}/mpv.nix"
@@ -62,13 +63,11 @@
 		"${myModulesPath}/fd.nix"
 		"${myModulesPath}/ruff.nix"
 		"${myModulesPath}/btop.nix"
-		"${myModulesPath}/swaylock.nix"
 		"${myModulesPath}/systemd.nix"
 		"${myModulesPath}/wofi.nix"
 		"${myModulesPath}/lazygit.nix"
 		"${myModulesPath}/zellij.nix"
 		"${myModulesPath}/qutebrowser.nix"
-		"${myModulesPath}/obs-studio.nix"
 		"${myModulesPath}/imv.nix"
 		"${myModulesPath}/gemini-cli.nix"
 		"${myModulesPath}/direnv.nix"
@@ -80,6 +79,10 @@
 		"${myModulesPath}/freetube.nix"
 		"${myModulesPath}/tidal-interface.nix"
 		"${myModulesPath}/browsers.nix"
+		"${myModulesPath}/rclone.nix"
+
+		# Personal Programs
+		"${myModulesPath}/uba-sync.nix"
   ];
 
 	home.sessionVariables = {
@@ -100,5 +103,4 @@
     categories = [ "Office" "Utility" ];
     icon = "utilities-terminal"; # O la ruta a un icono png si lo descargas
   };
-
 }

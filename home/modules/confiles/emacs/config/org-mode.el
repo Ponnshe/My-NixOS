@@ -60,6 +60,7 @@
         '(("d" "Dashboard"
            ((agenda "" ((org-deadline-warning-days 7)))
             (todo "NEXT" ((org-agenda-overriding-header "Next Tasks")))
+            (tags-todo "+UBA/+TODO" ((org-agenda-overriding-header "UBA")))
             (tags-todo "+NOTE/+TODO" ((org-agenda-overriding-header "Notes to write")))
             (tags-todo "/STUDY+ACTIVE" ((org-agenda-overriding-header "STUDY")))
             (todo "READING" ((org-agenda-overriding-header "Reading")))
