@@ -80,6 +80,7 @@
 		"${myModulesPath}/tidal-interface.nix"
 		"${myModulesPath}/browsers.nix"
 		"${myModulesPath}/rclone.nix"
+		"${myModulesPath}/iamb.nix"
 
 		# Personal Programs
 		"${myModulesPath}/uba-sync.nix"

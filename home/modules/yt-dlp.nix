@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 {
-	programs.yazi = {
+	programs.yt-dlp = {
 	  enable = true;
 	};
 }
