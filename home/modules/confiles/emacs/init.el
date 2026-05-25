@@ -45,16 +45,15 @@
 (load (expand-file-name "config/org-modern.el" user-emacs-directory))
 (load (expand-file-name "config/org-roam-bibtex.el" user-emacs-directory))
 (load (expand-file-name "config/appt.el" user-emacs-directory))
+(load (expand-file-name "config/org-super-agenda.el" user-emacs-directory))
+(load (expand-file-name "config/nerd-icons-org-agenda.el" user-emacs-directory))
 
 ;; Tools and dev
-(load (expand-file-name "config/dired.el" user-emacs-directory))
-(load (expand-file-name "config/projectile-and-git.el" user-emacs-directory))
-(load (expand-file-name "config/shell-config.el" user-emacs-directory))
+(load (expand-file-name "config/magit.el" user-emacs-directory))
 (load (expand-file-name "config/plantuml.el" user-emacs-directory))
 (load (expand-file-name "config/rustic.el" user-emacs-directory))
 (load (expand-file-name "config/ob-mermaid.el" user-emacs-directory))
 
-(load (expand-file-name "config/sudo-edit.el" user-emacs-directory))
 (load (expand-file-name "config/eww.el" user-emacs-directory))
 
 ;; Aesthetics

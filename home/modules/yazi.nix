@@ -19,6 +19,7 @@
 			# 1. Definir la regla de apertura
 			open = {
 				rules = [
+					{ mime = "application/pdf"; use = [ "sioyek" ]; }
 					{ mime = "image/*"; use = [ "view" ]; }
 					# Agrega esto para capturar texto explícito y todo lo demás:
 					{ mime = "text/*"; use = [ "edit" ]; }
@@ -27,10 +28,17 @@
 			};
 
 			opener = {
+				sioyek = [
+					{
+						run = ''sioyek "$@"'';
+						orphan = true;
+						desc = "Open with sioyek";
+					}
+				];
 				view = [
 					{
 						run = ''imv "$@"'';
-						detach = true; # Esto es clave para que Yazi no se quede bloqueado esperando
+						orphan = true; # Esto es clave para que Yazi no se quede bloqueado esperando
 						desc = "Open with imv";
 					}
 				];

@@ -3,29 +3,46 @@
 let
   orgTaskGenerator = pkgs.writeShellScriptBin "generar-tareas-uba" ''
     TARGET_ORG="$HOME/org/agenda/tareas.org"
-    ACT_DIR="$HOME/Home/Studying/Uba/Semester5/programacion_concurrente/actividades"
+    DIRS=(
+      "$HOME/Home/Studying/Uba/Semester5/programacion_concurrente/actividades"
+      "$HOME/Home/Studying/Uba/Semester5/programacion_concurrente/clases_drive"
+      "$HOME/Home/Studying/Uba/Semester5/ciencia_datos/clases_drive"
+    )
     MARKER="$HOME/.cache/uba_last_sync"
 
     [ ! -f "$MARKER" ] && ${pkgs.coreutils}/bin/touch -d "1970-01-01" "$MARKER"
 
-    ${pkgs.findutils}/bin/find "$ACT_DIR" -type f -name "*.pdf" -newer "$MARKER" | while read -r file; do
-      filename=$(${pkgs.coreutils}/bin/basename "$file")
-      timestamp=$(${pkgs.coreutils}/bin/date "+[%Y-%m-%d %a %H:%M]")
-      deadline=$(${pkgs.coreutils}/bin/date -d "+5 days" "+<%Y-%m-%d %a>")
-      
-      # Generar el bloque Org anidado (Nivel 2) con tags
-      snippet="** TODO Procesar consigna: ''${filename%.*} :UBA:concu:
+    for ACT_DIR in "''${DIRS[@]}"; do
+      # 1. Resolución del tag de Materia
+      MATERIA_TAG="general"
+      [[ "$ACT_DIR" == *"programacion_concurrente"* ]] && MATERIA_TAG="concu"
+      [[ "$ACT_DIR" == *"cdd"* ]] && MATERIA_TAG="cdd"
+
+      # 2. Resolución del tag de Tipo de Tarea
+      TYPE_TAG="general"
+      [[ "$ACT_DIR" == *"actividades"* ]] && TYPE_TAG="tarea"
+      [[ "$ACT_DIR" == *"clases_drive"* || "$ACT_DIR" == *"clases"* ]] && TYPE_TAG="teoria"
+
+      mkdir -p "$ACT_DIR"
+
+      ${pkgs.findutils}/bin/find "$ACT_DIR" -type f -name "*.pdf" -newer "$MARKER" | while read -r file; do
+        relpath=$(${pkgs.coreutils}/bin/realpath --relative-to="$ACT_DIR" "$file")
+        timestamp=$(${pkgs.coreutils}/bin/date "+[%Y-%m-%d %a %H:%M]")
+        deadline=$(${pkgs.coreutils}/bin/date -d "+5 days" "+<%Y-%m-%d %a>")
+        
+        # Inyección de los tags compuestos (Materia + Tipo)
+        snippet="** TODO Procesar: ''${relpath%.*} :UBA:$MATERIA_TAG:$TYPE_TAG:
 DEADLINE: $deadline
 :PROPERTIES:
 :CAPTURED: $timestamp
 :END:
-- Ejecución: [[file:$file][Abrir PDF en Sioyek]]"
+- Archivo local: [[file:$file][Abrir en Sioyek]]"
 
-      # Inyección atómica: busca la línea que empieza por '* Active', imprime el snippet antes, y sigue
-      ${pkgs.gawk}/bin/awk -v snip="$snippet" '
-        /^\* Active/ { print snip; print; next }
-        { print }
-      ' "$TARGET_ORG" > "$TARGET_ORG.tmp" && ${pkgs.coreutils}/bin/mv "$TARGET_ORG.tmp" "$TARGET_ORG"
+        ${pkgs.gawk}/bin/awk -v snip="$snippet" '
+          /^\* Active/ { print snip; print; next }
+          { print }
+        ' "$TARGET_ORG" > "$TARGET_ORG.tmp" && ${pkgs.coreutils}/bin/mv "$TARGET_ORG.tmp" "$TARGET_ORG"
+      done
     done
 
     ${pkgs.coreutils}/bin/touch "$MARKER"
@@ -33,12 +50,16 @@ DEADLINE: $deadline
 in
 {
   systemd.user.services.prefetch-uba = {
-    Unit.Description = "Sincronización declarativa de consignas UBA y Org-mode";
+    Unit.Description = "Sincronización declarativa UBA (Concurrente + CDD)";
     Service = {
       Type = "oneshot";
       ExecStart = [
-        "${pkgs.rclone}/bin/rclone copy material_concu:PO %h/Home/Studying/Uba/Semester5/programacion_concurrente/actividades --update --transfers 4"
-        "${pkgs.rclone}/bin/rclone copy material_concu:TO %h/Home/Studying/Uba/Semester5/programacion_concurrente/clases_drive --update --transfers 4"
+				# Concu
+        "${pkgs.rclone}/bin/rclone copy material_concu:PO %h/Home/Studying/Uba/Semester5/programacion_concurrente/actividades --update"
+        "${pkgs.rclone}/bin/rclone copy material_concu:TO %h/Home/Studying/Uba/Semester5/programacion_concurrente/clases_drive --update"
+        
+				# CDD
+        "${pkgs.rclone}/bin/rclone copy \"material_cdd:Clases Teóricas\" %h/Home/Studying/Uba/Semester5/ciencia_datos/clases_drive --drive-export-formats pdf --update"
       ];
       ExecStartPost = "${orgTaskGenerator}/bin/generar-tareas-uba";
     };

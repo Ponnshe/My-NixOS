@@ -14,8 +14,6 @@
       counsel
       swiper
       magit
-      projectile
-      counsel-projectile
       org-roam
       org-roam-ui
 			org-modern
@@ -25,18 +23,11 @@
       ob-go
       ob-rust
       ob-typescript
-			sudo-edit
       rustic
       doom-themes
       doom-modeline
       all-the-icons
-      diredfl
-      all-the-icons-dired
-      dired-rainbow
-      dired-preview
       which-key
-      dashboard
-      prettier
       visual-fill-column
       org-download
       citar
@@ -44,10 +35,10 @@
       ivy-bibtex
       org-roam-bibtex
 			rand-theme
-			vterm
 			plantuml-mode
 			elfeed
 			elfeed-org
+			org-super-agenda
     ];
   };
 
@@ -58,18 +49,12 @@
   };
 
 	home.packages = with pkgs; [
-    jre
     plantuml
     graphviz
+
     mermaid-cli
+
     sqlite
-		cmake
-		libtool
-		libgcc
-		(texlive.combined.scheme-medium.withPackages (ps: with ps; [
-			dvipng
-			dvisvgm
-		]))
   ];
 
 	home.file.".emacs.d" = {
@@ -78,29 +63,34 @@
   };
 
 	home.file.".emacs.d/nix-env.el".text = 
-let
-  tex = pkgs.texlive.combined.scheme-medium;
-in
+	let
+		customTex = pkgs.texliveBasic.withPackages (ps: with ps; [
+			dvipng
+			dvisvgm
+			geometry
+			graphics
+			collection-mathscience
+			ulem
+		]);
+	in
 	''
-    ;; ARCHIVO AUTOGENERADO POR NIX - NO EDITAR A MANO
-    ;; Inyecta dependencias puras en el entorno de Emacs sin contaminar el sistema
+			;; ARCHIVO AUTOGENERADO POR NIX - NO EDITAR A MANO
+			;; Inyecta dependencias puras en el entorno de Emacs sin contaminar el sistema
 
-    (setenv "PATH" (concat "${pkgs.lib.makeBinPath [ 
-      pkgs.jre 
-      pkgs.plantuml 
-      pkgs.graphviz 
-      pkgs.mermaid-cli 
-      pkgs.sqlite 
-			tex
-    ]}:" (getenv "PATH")))
+			(setenv "PATH" (concat "${pkgs.lib.makeBinPath [ 
+				pkgs.plantuml 
+				pkgs.graphviz 
+				pkgs.mermaid-cli 
+				pkgs.sqlite 
+				customTex
+			]}:" (getenv "PATH")))
 
-    (setq exec-path (append '(
-      "${pkgs.jre}/bin"
-      "${pkgs.plantuml}/bin"
-      "${pkgs.graphviz}/bin"
-      "${pkgs.mermaid-cli}/bin"
-      "${pkgs.sqlite}/bin"
-			"${tex}/bin"
-    ) exec-path))
-  '';
+			(setq exec-path (append '(
+				"${pkgs.plantuml}/bin"
+				"${pkgs.graphviz}/bin"
+				"${pkgs.mermaid-cli}/bin"
+				"${pkgs.sqlite}/bin"
+				"${customTex}/bin"
+			) exec-path))
+		'';
 }

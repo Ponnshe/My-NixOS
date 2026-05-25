@@ -1,6 +1,8 @@
 { pkgs, ... }:
 
 {
+  systemd.user.services.mopidy.Install.wantedBy = pkgs.lib.mkForce [ ];
+
   services.mopidy = {
     enable = true;
     extensionPackages = with pkgs; [

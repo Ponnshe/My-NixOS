@@ -3,7 +3,7 @@
 {
 	programs = {
 		nyxt = {
-			enable = true;
+			enable = false;
 		};
 
 		w3m = {

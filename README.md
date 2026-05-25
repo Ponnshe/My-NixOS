@@ -47,6 +47,26 @@ direnv allow
 
 Al hacer esto, `direnv` activará automáticamente el entorno con las herramientas necesarias (LSP, Compiladores, Formateadores) solo en esa carpeta.
 
+### 3. Servicios Bajo Demanda (On-Demand)
+
+Para mantener el sistema ligero y optimizar los recursos, varios servicios pesados o de uso ocasional han sido configurados para **no iniciar automáticamente** durante el arranque del sistema. Si necesitas utilizarlos, debes iniciarlos manualmente.
+
+**Servicios del sistema (requieren `sudo`):**
+```bash
+sudo systemctl start docker            # (También inicia containerd automáticamente)
+sudo systemctl start postgresql
+sudo systemctl start qdrant
+sudo systemctl start matrix-conduit
+sudo systemctl start mautrix-whatsapp
+sudo systemctl start caddy
+sudo systemctl start bluetooth
+```
+
+**Servicios de usuario:**
+```bash
+systemctl --user start mopidy
+```
+
 ## Notas Importantes
 
 *   **Neovim:** Abre Neovim *dentro* de la carpeta del proyecto una vez que el entorno se haya cargado. Neovim usará las herramientas (LSP) provistas por el flake del proyecto.

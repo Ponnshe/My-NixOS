@@ -8,6 +8,7 @@
 (menu-bar-mode -1) (setq visible-bell t)
 
 (set-face-attribute 'default nil :font "Hack Nerd Font" :height 200)
+(global-hl-line-mode 1)
 
 (column-number-mode)
 (global-display-line-numbers-mode t)
@@ -15,8 +16,7 @@
 
 ;; Ocultar números de línea en terminales
 (dolist (mode '(term-mode-hook
-                eshell-mode-hook
-                vterm-mode-hook))
+                eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; Home.org al iniciar

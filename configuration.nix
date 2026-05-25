@@ -175,7 +175,15 @@ in
       NetworkManager-wait-online.enable = false;
       docker = {
         enable = true;
+        wantedBy = pkgs.lib.mkForce [];
       };
+      containerd.wantedBy = pkgs.lib.mkForce [];
+      postgresql.wantedBy = pkgs.lib.mkForce [];
+      qdrant.wantedBy = pkgs.lib.mkForce [];
+      matrix-conduit.wantedBy = pkgs.lib.mkForce [];
+      mautrix-whatsapp.wantedBy = pkgs.lib.mkForce [];
+      caddy.wantedBy = pkgs.lib.mkForce [];
+      bluetooth.wantedBy = pkgs.lib.mkForce [];
     };
   };
 
@@ -261,9 +269,6 @@ in
         setSocketVariable = true;
       };
     };
-		vswitch = {
-		  enable = true;
-		};
   };
 
 

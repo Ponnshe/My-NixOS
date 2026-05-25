@@ -118,6 +118,10 @@ in
 				"match:class ^imv, workspace special:magic, float on, center on, dim_around on, size monitor_w*0.8 monitor_h*0.8"
 
 				"match:class ^pomo-break, fullscreen on, stay_focused on, monitor eDP-1"
+
+				"match:class ^qute-gemini$, workspace special:gemini, float on, size monitor_w*0.8 monitor_h*0.8, center on"
+				"match:class ^(brave-gemini\.google\.com.*)$, workspace special:gemini, float on, size monitor_w*0.8 monitor_h*0.8, center on"
+
       ];
 
 			layerrule = [
@@ -135,6 +139,7 @@ in
         "$mainMod, V, togglesplit"
         "$mainMod, f, fullscreen"
         "$mainMod, M, togglespecialworkspace, magic"
+        "$mainMod SHIFT, G, togglespecialworkspace, gemini"
         "$mainMod SHIFT, M, movetoworkspace, special:magic"
         # Move focus window
         "$mainMod, H, movefocus, l"
@@ -190,6 +195,7 @@ in
         "bash ${scriptsPath}/utils/start.sh"
         "bash ~/scripts/clean_auto_saves.sh"
 				"hyprsunset"
+				"qutebrowser --basedir ~/.local/share/qutebrowser-gemini --desktop-file-name=qute-gemini https://gemini.google.com/"
       ];
 
 			extraConfig = ''
