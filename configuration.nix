@@ -71,6 +71,8 @@ in
     extraModprobeConfig = ''
       options snd-aloop index=1
     '';
+		tmp.useTmpfs = true;
+		tmp.tmpfsSize = "50%"; # Limita el tmpfs a ~7GB para no colapsar el sistema
   };
 
   programs.zsh.enable = true;  # Habilita zsh a nivel de sistema
