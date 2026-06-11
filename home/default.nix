@@ -3,8 +3,7 @@
   home.username = "ponnshe"; home.homeDirectory = "/home/ponnshe";
 
   programs.home-manager.enable = true;
-  home.stateVersion = "25.05";
-  fonts.fontconfig.enable = true;
+  home.stateVersion = "25.05"; fonts.fontconfig.enable = true;
 
   home.packages = [ 
 		pkgs.pipe-viewer
@@ -48,6 +47,8 @@
 		pkgs.chafa
 		pkgs.figlet
 		pkgs.lolcat
+
+		pkgs.onlyoffice-desktopeditors
   ]; 
 
   imports = [
@@ -84,6 +85,9 @@
 
 		# Personal Programs
 		"${myModulesPath}/uba-sync.nix"
+
+		# IA
+		"${myModulesPath}/ollama.nix"
   ];
 
 	home.sessionVariables = {

@@ -26,7 +26,7 @@ in
 
     settings = {
 			"zoom.default" = 150;
-			"qt.args" = [ "disable-features=Translate" ];
+			"qt.args" = [ "disable-features=Translate" "disable-translate" ];
 
       # --- Comportamiento y Google ---
       "content.canvas_reading" = false;
