@@ -1,0 +1,227 @@
+<<< /run/current-system
+>>> result
+Version changes:
+[U.]  #001  7zz                            26.00 -> 26.01
+[U.]  #002  SDL2_image                     2.8.8 -> 2.8.12
+[U.]  #003  SDL2_mixer                     2.8.1 -> 2.8.2
+[U*]  #004  accountsservice                23.13.9 -> 26.13.3
+[U*]  #005  adwaita-icon-theme             49.0 -> 50.0
+[U*]  #006  alsa-utils                     1.2.14 -> 1.2.15.2
+[U.]  #007  anki                           25.09.3, 25.09.3-lib -> 25.09.4, 25.09.4-lib
+[U.]  #008  anki-with-addons               25.09.3 -> 25.09.4
+[U.]  #009  aquamarine                     0.11.0 -> 0.12.0
+[C.]  #010  at-spi2-core                   2.58.3 x2 -> 2.58.3, 2.60.1
+[U.]  #011  aws-c-event-stream             0.5.7 -> 0.7.0
+[U*]  #012  bind                           9.20.22-host, 9.20.22-lib, 9.20.22-man -> 9.20.23-host, 9.20.23-lib, 9.20.23-man
+[U.]  #013  brave                          1.90.121 -> 1.91.168
+[U.]  #014  btrfs-progs                    6.19.1 -> 7.0
+[U.]  #015  bubblewrap                     0.11.1 -> 0.11.2
+[U.]  #016  caddy                          2.11.2 -> 2.11.4
+[C.]  #017  chafa                          1.18.1 x2, 1.18.1-bin x2, 1.18.1-dev, 1.18.1-man -> 1.18.1, 1.18.1-bin, 1.18.1-dev, 1.18.2, 1.18.2-bin, 1.18.2-man
+[U.]  #018  chromium                       148.0.7778.96, 148.0.7778.96-sandbox -> 149.0.7827.102, 149.0.7827.102-sandbox
+[U.]  #019  chromium-unwrapped             148.0.7778.96, 148.0.7778.96-sandbox -> 149.0.7827.102, 149.0.7827.102-sandbox
+[U.]  #020  cmark                          0.31.1 -> 0.31.2
+[C.]  #021  coreutils                      9.10 x3 -> 9.10, 9.11 x2
+[U*]  #022  coreutils-full                 9.10, 9.10-info -> 9.11, 9.11-info
+[C.]  #023  cups                           2.4.16, 2.4.16-lib x2, 2.4.16-man -> 2.4.16-lib, 2.4.19, 2.4.19-lib, 2.4.19-man
+[C*]  #024  curl                           8.18.0, 8.19.0 x3, 8.19.0-bin x2, 8.19.0-man x2 -> 8.18.0, 8.20.0 x3, 8.20.0-bin x2, 8.20.0-man x2
+[C.]  #025  curl-impersonate               1.5.1, 1.5.5 -> 1.5.1, 1.5.6
+[U.]  #026  dash                           0.5.13.2 -> 0.5.13.3
+[C.]  #027  deno                           2.7.9, 2.7.14 -> 2.7.9, 2.8.2
+[U.]  #028  dhcpcd                         10.3.1 -> 10.3.2
+[U.]  #029  dnsmasq                        2.92 -> 2.92rel2
+[U*]  #030  docker                         29.4.2 -> 29.5.3
+[U.]  #031  docker-compose                 5.1.3 -> 5.1.4
+[U.]  #032  docker-containerd              29.4.2 -> 29.5.3
+[U.]  #033  docker-runc                    29.4.2 -> 29.5.3
+[U.]  #034  docker-tini                    29.4.2 -> 29.5.3
+[U.]  #035  electron                       41.3.0 -> 41.7.1
+[U.]  #036  electron-unwrapped             41.3.0 -> 41.7.1
+[U.]  #037  ethtool                        6.19 -> 7.0
+[C.]  #038  expat                          2.7.4, 2.7.5 x2 -> 2.7.4, 2.8.0 x2
+[C.]  #039  ffmpeg                         7.1.3-data, 7.1.3-lib, 8.0.1, 8.0.1-bin x2, 8.0.1-data x2, 8.0.1-dev, 8.0.1-lib x2 -> 7.1.4-data, 7.1.4-lib, 8.0.1, 8.0.1-bin, 8.0.1-data, 8.0.1-dev, 8.0.1-lib, 8.1-bin, 8.1-data, 8.1-lib
+[C.]  #040  ffmpeg-headless                8.0.1-bin x2, 8.0.1-data x3, 8.0.1-lib x3 -> 8.0.1-bin, 8.0.1-data, 8.0.1-lib, 8.1-bin, 8.1-data x2, 8.1-lib x2
+[C*]  #041  file                           5.45 x3, 5.45-man -> 5.45, 5.47 x2, 5.47-man
+[U*]  #042  firefox                        150.0.2 -> 151.0.4
+[U.]  #043  firefox-unwrapped              150.0.2 -> 151.0.4
+[U.]  #044  font-util                      1.4.1 -> 1.4.2
+[C.]  #045  fonts.conf                     <none> x2 -> <none>
+[U.]  #046  foot                           1.26.1, 1.26.1-terminfo -> 1.27.0, 1.27.0-terminfo
+[U.]  #047  freetube                       0.24.0 -> 0.24.1
+[D.]  #048  full-border.yazi               25.2.26-unstable-2026-04-22 -> 0-unstable-2026-05-13
+[C*]  #049  fuse                           2.9.9, 2.9.9-bin, 2.9.9-man, 3.17.4, 3.17.4-bin, 3.17.4-man -> 2.9.9-bin, 2.9.9-man, 3.17.4, 3.17.4-bin, 3.17.4-man
+[U.]  #050  fuse-overlayfs                 1.16 -> 1.17
+[C.]  #051  fzf                            0.71.0, 0.72.0, 0.72.0-man -> 0.71.0, 0.73.1, 0.73.1-man
+[C.]  #052  gdk-pixbuf                     2.44.5 x2, 2.44.5-man -> 2.44.5, 2.44.6, 2.44.6-man
+[C.]  #053  gdk-pixbuf-loaders.cache       <none> x2 -> <none>
+[U.]  #054  ghostscript                    10.06.0, 10.06.0-fonts -> 10.07.0, 10.07.0-fonts
+[U.]  #055  ghostscript-with-X             10.06.0, 10.06.0-fonts -> 10.07.0, 10.07.0-fonts
+[U*]  #056  git                            2.53.0, 2.53.0-doc -> 2.54.0, 2.54.0-doc
+[U.]  #057  git-minimal                    2.53.0 -> 2.54.0
+[C.]  #058  glib                           2.86.3 x3, 2.86.3-bin, 2.86.3-dev -> 2.86.3, 2.88.1 x2, 2.88.1-bin, 2.88.1-dev
+[C.]  #059  glibmm                         2.66.8 x3, 2.86.0 -> 2.66.8 x3, 2.88.0
+[U*]  #060  gnome-keyring                  48.0 -> 50.0
+[U.]  #061  gnome-online-accounts          3.56.4 -> 3.58.1
+[U.]  #062  gnome-settings-daemon          49.1-gsettings-schemas -> 50.1-gsettings-schemas
+[C.]  #063  gnupg                          2.4.9 x4 -> 2.4.9 x3
+[C*]  #064  gnutar                         1.35 x3, 1.35-info -> 1.35 x2, 1.35-info
+[C.]  #065  gnutls                         3.8.12 x3 -> 3.8.12, 3.8.13 x2
+[U.]  #066  google-chrome                  148.0.7778.96 -> 149.0.7827.102
+[U.]  #067  gsasl                          2.2.2 -> 2.2.3
+[C.]  #068  gsettings-desktop-schemas      49.1 x2 -> 49.1, 50.1
+[C.]  #069  gtk4                           4.20.3 x2 -> 4.20.3, 4.22.4
+[C.]  #070  gtkmm                          3.24.10, 4.20.0 -> 3.24.10, 4.22.0
+[U*]  #071  gvfs                           1.58.4 x2 -> 1.60.0 x2
+[C.]  #072  harfbuzz                       12.3.0 x3 -> 12.3.0, 13.2.1 x2
+[U.]  #073  harfbuzz-icu                   12.3.0 -> 13.2.1
+[U.]  #074  hyprgraphics                   0.5.0 -> 0.5.1
+[U*]  #075  hyprland                       0.54.3, 0.54.3-man -> 0.55.3, 0.55.3-man
+[U*]  #076  iceauth                        1.0.10 -> 1.0.11
+[U.]  #077  ijs                            10.06.0 -> 10.07.0
+[U*]  #078  imagemagick                    7.1.2-19, 7.1.2-19-doc -> 7.1.2-23, 7.1.2-23-doc
+[U.]  #079  initrd-linux                   7.0.5 -> 7.0.12
+[U*]  #080  iproute2                       6.19.0 -> 7.0.0
+[U.]  #081  jemalloc                       5.3.0-unstable-2025-09-12 x2 -> 5.3.1 x2
+[U.]  #082  lazygit                        0.61.1 -> 0.62.2
+[C.]  #083  libadwaita                     1.8.4, 1.8.5.1 -> 1.8.4, 1.9.0
+[C.]  #084  libarchive                     3.8.4-lib, 3.8.6, 3.8.6-dev, 3.8.6-lib x2 -> 3.8.4-lib, 3.8.7, 3.8.7-dev, 3.8.7-lib x2
+[C.]  #085  libassuan                      3.0.2 x3 -> 3.0.2 x2
+[U.]  #086  libblockdev                    3.4.0 -> 3.5.0
+[C.]  #087  libbpf                         1.6.3 x3 -> 1.6.3, 1.7.0 x2
+[C.]  #088  libcap-ng                      0.9, 0.9.2 x2 -> 0.9, 0.9.3 x2
+[C.]  #089  libdrm                         2.4.131 x3, 2.4.131-bin x3, 2.4.131-dev x3 -> 2.4.131, 2.4.131-bin, 2.4.131-dev, 2.4.133 x2, 2.4.133-bin x2, 2.4.133-dev x2
+[U.]  #090  libexif                        0.6.25 -> 0.6.26
+[C.]  #091  libfido2                       1.16.0 x3 -> 1.16.0, 1.17.0 x2
+[U.]  #092  libgit2                        1.9.2-lib -> 1.9.4-lib
+[U.]  #093  libgphoto2                     2.5.33 -> 2.5.34
+[U.]  #094  libgsf                         1.14.55 -> 1.14.58
+[U.]  #095  libinput                       1.31.1, 1.31.1-bin, 1.31.1-dev -> 1.31.3, 1.31.3-bin, 1.31.3-dev
+[U.]  #096  libpq                          18.2 -> 18.4
+[U.]  #097  libraqm                        0.10.4 -> 0.10.5
+[U.]  #098  libraw                         0.22.0-lib -> 0.22.1-lib
+[C.]  #099  librsvg                        2.61.4 x2 -> 2.61.4, 2.62.1
+[U.]  #100  libslirp                       4.9.1 -> 4.9.3
+[U.]  #101  libsodium                      1.0.21-unstable-2026-03-29 -> 1.0.22-unstable-2026-04-09
+[U.]  #102  libwacom                       2.18.0 -> 2.19.0
+[C.]  #103  libxml2                        2.15.1 x3 -> 2.15.1, 2.15.2 x2
+[U.]  #104  libxpm                         3.5.18 -> 3.5.19
+[U.]  #105  linux                          7.0.5, 7.0.5-modules x2 -> 7.0.12, 7.0.12-modules x2
+[U.]  #106  linux-firmware                 20260410-zstd -> 20260519-zstd
+[U.]  #107  llhttp                         9.3.1, 9.3.1-dev -> 9.4.1, 9.4.1-dev
+[C.]  #108  lua                            5.2.4 x2, 5.2.4-env x2, 5.4.7 -> 5.2.4 x2, 5.2.4-env x2, 5.4.7, 5.5.0
+[U.]  #109  luajit                         2.1.1741730670, 2.1.1741730670-env -> 2.1.1774638290, 2.1.1774638290-env
+[U*]  #110  luffy                          1.1.5 -> 1.2.1
+[C*]  #111  lvm2                           2.03.38, 2.03.38-bin, 2.03.38-lib x3, 2.03.38-man, 2.03.38-scripts -> 2.03.38-lib, 2.03.39, 2.03.39-bin, 2.03.39-lib x2, 2.03.39-man, 2.03.39-scripts
+[U.]  #112  lvm2-with-dmeventd             2.03.38 -> 2.03.39
+[U.]  #113  mautrix-whatsapp               26.04 -> 26.05
+[C.]  #114  mbedtls                        3.6.5 x3 -> 3.6.5, 3.6.6 x2
+[U.]  #115  mesa                           26.1.0 x2 -> 26.1.2 x2
+[U.]  #116  moby                           29.4.2 -> 29.5.3
+[C.]  #117  nghttp2                        1.67.1-lib, 1.68.1, 1.68.1-dev, 1.68.1-lib x3 -> 1.67.1-lib, 1.69.0, 1.69.0-dev, 1.69.0-lib x2
+[C.]  #118  ngtcp2                         1.19.0, 1.22.0 x2, 1.22.0-dev, 1.22.1 -> 1.19.0, 1.22.1 x2, 1.22.1-dev, 1.23.0
+[U.]  #119  nix-direnv                     3.1.1 -> 3.1.2
+[U*]  #120  nixos-rebuild-ng               26.05 -> 26.11
+[U.]  #121  nixos-system-Dante-NixOS       26.05.20260510.da5ad66 -> 26.11.20260610.9ae611a
+[U.]  #122  nodejs                         22.22.2, 24.14.1 -> 24.15.0
+[U.]  #123  nodejs-slim                    22.22.2, 22.22.2-corepack, 22.22.2-npm, 24.14.1, 24.14.1-corepack, 24.14.1-npm -> 24.15.0, 24.15.0-corepack, 24.15.0-npm
+[C.]  #124  npth                           1.8 x3 -> 1.8 x2
+[U.]  #125  nspr                           4.38.2 -> 4.39
+[C.]  #126  nss                            3.112.3, 3.112.3-man, 3.123.1 -> 3.112.5, 3.112.5-man, 3.124
+[C.]  #127  nss-cacert                     3.121 x2, 3.121-p11kit -> 3.121, 3.123, 3.123-p11kit
+[U.]  #128  nvim-host-python3              3.13.12-env -> 3.13.13-env
+[U.]  #129  oh-my-posh                     29.12.0 -> 29.14.0
+[U.]  #130  ollama                         0.23.1 -> 0.30.6
+[U.]  #131  onnxruntime                    1.24.4 -> 1.26.0
+[C.]  #132  openexr                        3.3.5, 3.3.8 -> 3.3.5, 3.4.10
+[U.]  #133  openjdk                        21.0.10+7 -> 21.0.12+2
+[U.]  #134  openjdk-minimal-jre            21.0.10+7 -> 21.0.12+2
+[C.]  #135  openssl                        3.6.1 x3, 3.6.1-bin, 3.6.1-dev, 3.6.1-man -> 3.6.1, 3.6.2 x2, 3.6.2-bin, 3.6.2-dev, 3.6.2-man
+[C.]  #136  pango                          1.57.0 x3, 1.57.0-bin -> 1.57.0, 1.57.1 x2, 1.57.1-bin
+[U.]  #137  pciutils                       3.14.0, 3.14.0-man -> 3.15.0, 3.15.0-man
+[C*]  #138  pipewire                       1.6.2, 1.6.3 x2, 1.6.3-doc, 1.6.3-jack, 1.6.3-man -> 1.6.2, 1.6.5 x2, 1.6.5-doc, 1.6.5-jack, 1.6.5-man
+[U.]  #139  plantuml                       1.2026.2 -> 1.2026.3
+[U*]  #140  plymouth                       24.004.60 -> 26.134.222
+[C.]  #141  python3                        3.13.12 x3, 3.13.12-env x7 -> 3.13.12, 3.13.13 x2, 3.13.13-env x7
+[U.]  #142  python3.13-aiohttp             3.13.4 -> 3.13.5
+[U.]  #143  python3.13-attrs               25.4.0 -> 26.1.0
+[C.]  #144  python3.13-charset-normalizer  3.4.4 x2 -> 3.4.4, 3.4.7
+[C.]  #145  python3.13-cryptography        46.0.5, 46.0.6 -> 46.0.5, 48.0.0
+[C.]  #146  python3.13-idna                3.11 x2 -> 3.11, 3.13
+[U.]  #147  python3.13-packaging           25.0 -> 26.1
+[U.]  #148  python3.13-pygobject           3.54.5, 3.54.5-dev -> 3.56.2, 3.56.2-dev
+[U.]  #149  python3.13-pyqt6               6.9.0, 6.9.0-dev -> 6.11.0, 6.11.0-dev
+[U.]  #150  rclone                         1.74.0, 1.74.0-man -> 1.74.3, 1.74.3-man
+[U.]  #151  ruff                           0.15.12 -> 0.15.16
+[U.]  #152  samba                          4.23.5 -> 4.23.8
+[U*]  #153  scrcpy                         3.3.4 -> 4.0
+[C.]  #154  sdl2-compat                    2.32.64, 2.32.66 -> 2.32.64, 2.32.68
+[C.]  #155  sdl3                           3.4.2-lib x2 -> 3.4.2-lib, 3.4.8-lib x2
+[C.]  #156  simdutf                        6.5.0, 8.1.0 -> 6.5.0, 9.0.0
+[U.]  #157  sioyek                         2.0.0-unstable-2026-04-08 -> 2.0.0-unstable-2026-06-06
+[U.]  #158  slirp4netns                    1.3.3 -> 1.3.4
+[U*]  #159  sops                           3.13.0 -> 3.13.1
+[C.]  #160  tinysparql                     3.10.1 x2 -> 3.10.1, 3.11.1
+[C.]  #161  tzdata                         2026a x3 -> 2026a, 2026b x2
+[C.]  #162  unbound                        1.24.2-lib x3 -> 1.24.2-lib, 1.25.0-lib x2
+[C*]  #163  util-linux                     2.42, 2.42-bin, 2.42-lastlog, 2.42-lib, 2.42-login, 2.42-man, 2.42-mount, 2.42-swap -> 2.42-bin, 2.42-lastlog, 2.42-lib, 2.42-login, 2.42-man, 2.42-mount, 2.42-swap
+[C.]  #164  util-linux-minimal             2.41.3-lib, 2.41.3-login, 2.41.3-mount, 2.41.3-swap, 2.42 x2, 2.42-bin, 2.42-lib x2, 2.42-login x2, 2.42-man, 2.42-mount x2, 2.42-swap x2 -> 2.41.3-lib, 2.41.3-login, 2.41.3-mount, 2.41.3-swap, 2.42, 2.42-bin, 2.42-lib x2, 2.42-login x2, 2.42-man, 2.42-mount x2, 2.42-swap x2
+[U*]  #165  vivaldi                        7.9.3970.64 -> 8.0.4033.42
+[C.]  #166  wayland                        1.24.0 x3, 1.24.0-man -> 1.24.0, 1.25.0 x2, 1.25.0-man
+[U.]  #167  webkitgtk                      2.52.3+abi=4.1 -> 2.52.4+abi=4.1
+[U.]  #168  widevine-cdm                   4.10.2934.0 -> 4.10.3050.0
+[U.]  #169  wireless-regdb                 2026.02.04-zstd -> 2026.05.30-zstd
+[U.]  #170  wireshark-cli                  4.6.5 -> 4.6.6
+[U*]  #171  wireshark-qt                   4.6.5 -> 4.6.6
+[U.]  #172  wlroots                        0.20.0 -> 0.20.1
+[U.]  #173  x86_energy_perf_policy         6.18.28 -> 6.18.35
+[U.]  #174  xdg-dbus-proxy                 0.1.6 -> 0.1.7
+[U*]  #175  xdg-desktop-portal-gnome       49.0 -> 50.0
+[U.]  #176  xdg-user-dirs                  0.19, 0.19-lib, 0.19-man -> 0.20, 0.20-lib, 0.20-man
+[U*]  #177  xorg-server                    21.1.22 -> 21.1.23
+[U*]  #178  xrandr                         1.5.3 -> 1.5.4
+[U*]  #179  xterm                          407 -> 410
+[U*]  #180  xwayland                       24.1.11 -> 24.1.12
+[D.]  #181  yatline.yazi                   25.12.29-unstable-2026-01-27 -> 0.5.0
+[U.]  #182  yazi                           26.1.22 x2 -> 26.5.6 x2
+[U.]  #183  zathura                        2026.02.09, 2026.02.09-bin, 2026.02.09-dev, 2026.02.09-man -> 2026.05.20, 2026.05.20-bin, 2026.05.20-dev, 2026.05.20-man
+[U.]  #184  zathura-cb                     2026.02.03 -> 2026.05.10
+[U.]  #185  zathura-djvu                   2026.02.03 -> 2026.05.10
+[U.]  #186  zathura-pdf-mupdf              2026.02.03 -> 2026.05.10
+[U*]  #187  zathura-with-plugins           2026.02.09 -> 2026.05.20
+[U.]  #188  zellij                         0.44.2 -> 0.44.3
+[U.]  #189  zotero                         9.0.2 -> 9.0.4
+[U*]  #190  zsh                            5.9, 5.9-doc, 5.9-info, 5.9-man -> 5.9.1, 5.9.1-doc, 5.9.1-info, 5.9.1-man
+Added packages:
+[A.]  #01  antigravity-cli                                      1.0.7
+[A.]  #02  etc-environment.d                                    50-systemd-path.conf
+[A+]  #03  google-antigravity2                                  2.0.0-6324554176528384 x2
+[A.]  #04  google-antigravity2-fhs                              <none>
+[A.]  #05  google-antigravity2-fhs-bwrap                        <none>
+[A.]  #06  google-antigravity2-fhs-fhsenv-profile               <none>
+[A.]  #07  google-antigravity2-fhs-fhsenv-rootfs                <none>
+[A.]  #08  google-antigravity2-fhs-init                         <none>
+[A.]  #09  google-antigravity2-wrapper                          <none>
+[A.]  #10  hm_..zprofile                                        <none>
+[A.]  #11  libaec                                               1.1.6
+[A.]  #12  picotts                                              0-unstable-2021-05-06
+[A.]  #13  security-wrapper-Hyprland-x86_64-unknown-linux-musl  <none>
+[A.]  #14  unit-network-local-commands.service                  <none>
+[A.]  #15  unit-network.target                                  <none>
+[A.]  #16  unit-networking-scripted.target                      <none>
+[A.]  #17  unit-script-network-local-commands-start             <none>
+[A.]  #18  zellij-unwrapped                                     0.44.3
+Removed packages:
+[R.]  #01  antigravity-fhs                               <none>
+[R.]  #02  antigravity-fhs-bwrap                         <none>
+[R.]  #03  antigravity-fhs-fhsenv-profile                <none>
+[R.]  #04  antigravity-fhs-fhsenv-rootfs                 <none>
+[R.]  #05  antigravity-fhs-init                          <none>
+[R.]  #06  antigravity-wrapper                           <none>
+[R.]  #07  gemini-cli                                    0.41.2
+[R-]  #08  google-antigravity                            1.23.2-4781536860569600 x2
+[R.]  #09  svox                                          0-unstable-2021-05-06
+[R.]  #10  unit-blueman-applet.service                   <none>
+[R.]  #11  unit-network-local-commands.service-disabled  <none>
+[R.]  #12  unit-network-setup.service                    <none>
+[R.]  #13  unit-script-network-setup-start               <none>
+Closure size: 3291 -> 3284 (2436 paths added, 2443 paths removed, delta -7, disk usage -115.1MiB).

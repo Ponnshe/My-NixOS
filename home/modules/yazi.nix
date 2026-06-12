@@ -23,7 +23,7 @@
 					{ mime = "image/*"; use = [ "view" ]; }
 					# Agrega esto para capturar texto explícito y todo lo demás:
 					{ mime = "text/*"; use = [ "edit" ]; }
-					{ name = "*"; use = [ "edit" ]; }
+					{ url = "*"; use = [ "edit" ]; }
 				];
 			};
 
@@ -66,7 +66,7 @@
 					{
 						on = "<C-Enter>";
 						run = "shell sudo -E $EDITOR \"$@\"";
-						for = "Unix";
+						for = "unix";
 						desc = "Abrir archivo con sudo";
 					}
 				];
