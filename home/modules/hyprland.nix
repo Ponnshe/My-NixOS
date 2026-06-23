@@ -88,7 +88,6 @@ in
       };
 
       dwindle = {
-        pseudotile = true;
         preserve_split = true;
       };
 
@@ -137,7 +136,6 @@ in
         "$mainMod, S, exec, bash ${scriptsPath}/utils/launcher.sh ${scriptsPath}/utils"
         "$mainMod, E, exec, bash ${scriptsPath}/utils/edit_menu.sh ${liveModules} ${scriptsPath} ${liveScripts} ${liveHomeFile} ${liveConfigurationFile}"
         "$mainMod, P, pseudo"
-        "$mainMod, V, togglesplit"
         "$mainMod, f, fullscreen"
         "$mainMod, M, togglespecialworkspace, magic"
         "$mainMod SHIFT, G, togglespecialworkspace, gemini"
@@ -196,7 +194,7 @@ in
         "bash ${scriptsPath}/utils/start.sh"
         "bash ~/scripts/clean_auto_saves.sh"
 				"hyprsunset"
-				"qutebrowser --basedir ~/.local/share/qutebrowser-gemini --desktop-file-name=qute-gemini https://gemini.google.com/"
+				"brave --app=https://gemini.google.com --class=\"qute-gemini\""
       ];
 
 			extraConfig = ''

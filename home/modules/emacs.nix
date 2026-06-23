@@ -71,6 +71,11 @@
 			graphics
 			collection-mathscience
 			ulem
+
+			latexmk   # <-- El binario que intenta ejecutar org-compile-file
+			wrapfig   # <-- Requerido por org-mode por defecto
+			capt-of   # <-- Requerido por org-mode por defecto
+			hyperref  # <-- Requerido por org-mode por defecto
 		]);
 	in
 	''

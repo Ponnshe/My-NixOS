@@ -1,9 +1,11 @@
 { config, pkgs, lib, scriptsPath, myModulesPath, confilePath, ... }:
 {
-  home.username = "ponnshe"; home.homeDirectory = "/home/ponnshe";
+  home.username = "ponnshe"; 
+	home.homeDirectory = "/home/ponnshe";
 
   programs.home-manager.enable = true;
-  home.stateVersion = "25.05"; fonts.fontconfig.enable = true;
+  home.stateVersion = "24.05"; 
+	fonts.fontconfig.enable = true;
 
   home.packages = [ 
 		pkgs.pipe-viewer
@@ -88,6 +90,9 @@
 
 		# IA
 		"${myModulesPath}/ollama.nix"
+		"${myModulesPath}/pi-coding-agent.nix"
+
+		"${myModulesPath}/obs-studio.nix"
   ];
 
 	home.sessionVariables = {

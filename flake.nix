@@ -55,6 +55,7 @@
 
 					home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
+					home-manager.backupFileExtension = "backup";
 
 					# Esto pasa los argumentos de NixOS (specialArgs) a Home Manager
           home-manager.extraSpecialArgs = { 
