@@ -73,7 +73,7 @@ in
     '';
 		tmp.useTmpfs = true;
 		tmp.tmpfsSize = "50%"; # Limita el tmpfs a ~7GB para no colapsar el sistema
-		extraModulePackages = [ config.boot.kernelPackages.rtl8821ce ];
+		extraModulePackages = [];
   };
 
 
