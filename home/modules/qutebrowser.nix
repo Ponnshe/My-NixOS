@@ -16,7 +16,7 @@ in
 
     # Motores de búsqueda rápidos
     searchEngines = {
-      DEFAULT = "https://www.google.com/search?q={}";
+      DEFAULT = "https://www.duckduckgo.com/search?q={}";
       nw = "https://search.nixos.org/packages?query={}";
       no = "https://search.nixos.org/options?query={}";
       gh = "https://github.com/search?q={}";
@@ -32,8 +32,8 @@ in
       "content.canvas_reading" = false;
       "content.webgl" = true;
       "content.media.audio_video_capture" = true;
-      "content.geolocation" = true;
-      "content.notifications.enabled" = true;
+      "content.geolocation" = false;
+      "content.notifications.enabled" = false;
       "content.headers.accept_language" = "es-AR,es;q=0.9,en;q=0.8";
 
       # --- Estética Cyberpunk Violet ---
@@ -41,9 +41,6 @@ in
       "colors.webpage.bg" = "#1a1025"; # Violeta profundo
       "colors.webpage.preferred_color_scheme" = "dark";
       
-      # --- SOLUCIÓN ERROR image_8a3215.png ---
-      # Se elimina grayscale.pre_rendering porque ya no existe en Qt6
-      # En su lugar, usamos el algoritmo por defecto optimizado
       "colors.webpage.darkmode.algorithm" = "lightness-cielab"; 
 
       # --- Interfaz (Tabs y Editor) ---
@@ -51,7 +48,6 @@ in
 			"tabs.show" = "switching";
       "tabs.favicons.show" = "always";
       "tabs.title.format" = "{index}: {audio}{current_title}";
-#			"editor.command" = ["foot" "-a" "my-file-editor" "emacsclient" "-nw" "{}"];
 			"editor.command" = [ "${qute-editor}" "{}" ];
       "content.blocking.method" = "both";
 

@@ -73,7 +73,10 @@ in
     '';
 		tmp.useTmpfs = true;
 		tmp.tmpfsSize = "50%"; # Limita el tmpfs a ~7GB para no colapsar el sistema
+		extraModulePackages = [ config.boot.kernelPackages.rtl8821ce ];
   };
+
+
 
   programs.zsh.enable = true;  # Habilita zsh a nivel de sistema
 
@@ -167,6 +170,7 @@ in
       };
     };
     fancontrol.enable = false;
+		enableRedistributableFirmware = true;
   };
 
   # Systemd module
